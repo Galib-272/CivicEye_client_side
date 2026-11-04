@@ -12,11 +12,21 @@ export function safeNextPath(next: string | null | undefined, fallback = '/accou
   return next;
 }
 
-/** Where a signed-in user must go before anything else, based on two-factor state. */
-export function mfaRedirect(mfa: MfaState): string | null {
-  if (mfa === 'pending') return '/two-factor';
-  if (mfa === 'setup_required') return '/two-factor/setup';
-  return null;
+/**
+ * Where a signed-in user must go before anything else, based on two-factor state. The page
+ * they originally asked for travels along as ?next= so they land there afterwards.
+ */
+export function mfaRedirect(mfa: MfaState, next?: string): string | null {
+  const step =
+    mfa === 'pending' ? '/two-factor' : mfa === 'setup_required' ? '/two-factor/setup' : null;
+  if (!step) return null;
+  const target = safeNextPath(next);
+  return target === '/account' ? step : `${step}?next=${encodeURIComponent(target)}`;
+}
+
+/** The validated ?next= of the current page (call from event handlers and effects only). */
+export function currentNextPath(): string {
+  return safeNextPath(new URLSearchParams(window.location.search).get('next'));
 }
 
 /** Reads a token from the URL fragment (#token=…), which is never sent to any server. */

@@ -30,7 +30,7 @@ export function SignInForm() {
 
   const onSubmit = form.handleSubmit((values) =>
     login.mutate(values, {
-      onSuccess: (state) => router.replace(mfaRedirect(state.mfa) ?? next),
+      onSuccess: (state) => router.replace(mfaRedirect(state.mfa, next) ?? next),
       onError: () => form.resetField('password'),
     }),
   );

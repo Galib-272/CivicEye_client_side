@@ -7,6 +7,7 @@ import { FormAlert } from '@/components/ui/form-alert';
 import { TextField } from '@/components/ui/text-field';
 import { useRouter } from '@/i18n/navigation';
 import { useMfaChallenge, type AuthState } from './api';
+import { currentNextPath } from './navigation';
 import { errorMessage } from './server-errors';
 
 export function TwoFactorChallenge({ auth }: { auth: AuthState }) {
@@ -21,7 +22,7 @@ export function TwoFactorChallenge({ auth }: { auth: AuthState }) {
 
   // Nothing to verify: send the user on.
   useEffect(() => {
-    if (auth.mfa !== 'pending') router.replace('/account');
+    if (auth.mfa !== 'pending') router.replace(currentNextPath());
   }, [auth.mfa, router]);
 
   const onSubmit = (event: FormEvent) => {
@@ -33,7 +34,7 @@ export function TwoFactorChallenge({ auth }: { auth: AuthState }) {
     }
     setFormatError(undefined);
     challenge.mutate(useBackup ? { backupCode: input } : { code: input }, {
-      onSuccess: () => router.replace('/account'),
+      onSuccess: () => router.replace(currentNextPath()),
       onError: () => setValue(''),
     });
   };

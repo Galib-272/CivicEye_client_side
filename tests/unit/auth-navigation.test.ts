@@ -31,6 +31,15 @@ describe('mfaRedirect', () => {
     expect(mfaRedirect('none')).toBeNull();
     expect(mfaRedirect('verified')).toBeNull();
   });
+
+  it('carries the originally requested page through the two-factor step', () => {
+    expect(mfaRedirect('pending', '/reports/new')).toBe('/two-factor?next=%2Freports%2Fnew');
+    expect(mfaRedirect('setup_required', '/admin/reports/triage')).toBe(
+      '/two-factor/setup?next=%2Fadmin%2Freports%2Ftriage',
+    );
+    expect(mfaRedirect('pending', '/account')).toBe('/two-factor');
+    expect(mfaRedirect('pending', '//attacker.example')).toBe('/two-factor');
+  });
 });
 
 describe('tokenFromFragment', () => {

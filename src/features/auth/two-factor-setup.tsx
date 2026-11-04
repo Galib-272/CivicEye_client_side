@@ -8,6 +8,7 @@ import { FormAlert } from '@/components/ui/form-alert';
 import { TextField } from '@/components/ui/text-field';
 import { useRouter } from '@/i18n/navigation';
 import { useMfaEnable, useMfaSetup, type AuthState } from './api';
+import { currentNextPath } from './navigation';
 import { errorMessage } from './server-errors';
 
 export function TwoFactorSetup({ auth }: { auth: AuthState }) {
@@ -54,7 +55,7 @@ export function TwoFactorSetup({ auth }: { auth: AuthState }) {
           >
             {copied ? t('copied') : t('copyCodes')}
           </Button>
-          <Button type="button" onClick={() => router.replace('/account')}>
+          <Button type="button" onClick={() => router.replace(currentNextPath())}>
             {t('backupDone')}
           </Button>
         </div>

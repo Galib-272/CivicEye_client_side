@@ -28,7 +28,7 @@ export function RequireAuth({
     auth === null
       ? `/sign-in?next=${encodeURIComponent(pathname)}`
       : auth && !allowIncompleteMfa
-        ? mfaRedirect(auth.mfa)
+        ? mfaRedirect(auth.mfa, pathname)
         : null;
 
   useEffect(() => {
