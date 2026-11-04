@@ -57,6 +57,11 @@ async function mockApi(page: Page, handlers: Record<string, Handler>) {
   });
 }
 
+/** Next.js renders its own (empty) route-announcer alert, so match our alerts by text. */
+function alertWithText(page: Page, text: string) {
+  return page.getByRole('alert').filter({ hasText: text });
+}
+
 const signedOut: Record<string, Handler> = { 'GET /auth/me': () => fail(401, 'UNAUTHENTICATED') };
 
 test.describe('authentication pages', () => {
@@ -76,7 +81,7 @@ test.describe('authentication pages', () => {
     await page.getByLabel('ইমেইল ঠিকানা').fill('rahima@example.test');
     await page.getByLabel('পাসওয়ার্ড', { exact: true }).fill('wrong password here');
     await page.getByRole('button', { name: 'সাইন ইন' }).click();
-    await expect(page.getByRole('alert')).toHaveText('ইমেইল বা পাসওয়ার্ড সঠিক নয়।');
+    await expect(alertWithText(page, 'ইমেইল বা পাসওয়ার্ড সঠিক নয়।')).toBeVisible();
   });
 
   test('validates fields before calling the API', async ({ page }) => {
@@ -157,7 +162,7 @@ test.describe('authentication pages', () => {
   test('explains an incomplete reset link', async ({ page }) => {
     await mockApi(page, signedOut);
     await page.goto('/en/reset-password');
-    await expect(page.getByRole('alert')).toContainText('This link is incomplete.');
+    await expect(alertWithText(page, 'This link is incomplete.')).toBeVisible();
   });
 
   test('shows account settings to a signed-in user', async ({ page }) => {
