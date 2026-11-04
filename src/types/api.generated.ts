@@ -881,12 +881,202 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public reports. Locations are rounded and reporters are never shown. */
+        get: operations["ReportsController_list_v1"];
+        put?: never;
+        /** Submit a report with 1–5 processed photos. Repeating the Idempotency-Key returns the same report. */
+        post: operations["ReportsController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The signed-in citizen’s reports, newest first. */
+        get: operations["ReportsController_mine_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/mine/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Counts of the signed-in citizen’s reports by status. */
+        get: operations["ReportsController_summary_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{publicId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A report: the full view for its citizen, otherwise the public view of a public report. */
+        get: operations["ReportsController_get_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit your report while it is SUBMITTED. Send If-Match with the current version. */
+        patch: operations["ReportsController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/reports/{publicId}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Status timeline. Reasons are shown only to the reporting citizen. */
+        get: operations["ReportsController_history_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{publicId}/withdraw": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Withdraw your report while it is SUBMITTED or NEEDS_INFORMATION. */
+        post: operations["ReportsController_withdraw_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/triage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Reports no single organization covers, oldest first (Super Admin). */
+        get: operations["AdminReportsController_triage_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}/route": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send a triaged report to a verified organization, with a reason. */
+        post: operations["AdminReportsController_route_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/media/upload-intent": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Get a 5-minute signed URL to upload one photo (JPEG, PNG or WebP, at most 10 MB). */
+        post: operations["MediaController_createIntent_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/media/{mediaId}/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm the upload finished; the photo is then checked and processed. */
+        post: operations["MediaController_confirm_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/media/{mediaId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Processing status and, when ready, short-lived image URLs. */
+        get: operations["MediaController_view_v1"];
+        put?: never;
+        post?: never;
+        /** Remove a photo that is not yet part of a submitted report. */
+        delete: operations["MediaController_remove_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
         /** @enum {string} */
-        ErrorCode: "VALIDATION_ERROR" | "UNAUTHENTICATED" | "FORBIDDEN" | "NOT_FOUND" | "CONFLICT" | "INVALID_STATE_TRANSITION" | "DUPLICATE_SUBMISSION" | "RATE_LIMITED" | "FILE_TOO_LARGE" | "UNSUPPORTED_FILE_TYPE" | "ORGANIZATION_NOT_ELIGIBLE" | "ASSIGNMENT_NOT_FOUND" | "AI_SERVICE_UNAVAILABLE" | "SERVICE_UNAVAILABLE" | "INTERNAL_ERROR" | "INVALID_CREDENTIALS" | "INVALID_TOKEN" | "INVALID_MFA_CODE" | "MFA_REQUIRED" | "EMAIL_NOT_VERIFIED" | "ACCOUNT_INACTIVE" | "CSRF_TOKEN_INVALID";
+        ErrorCode: "VALIDATION_ERROR" | "UNAUTHENTICATED" | "FORBIDDEN" | "NOT_FOUND" | "CONFLICT" | "INVALID_STATE_TRANSITION" | "DUPLICATE_SUBMISSION" | "RATE_LIMITED" | "FILE_TOO_LARGE" | "UNSUPPORTED_FILE_TYPE" | "ORGANIZATION_NOT_ELIGIBLE" | "ASSIGNMENT_NOT_FOUND" | "AI_SERVICE_UNAVAILABLE" | "SERVICE_UNAVAILABLE" | "INTERNAL_ERROR" | "INVALID_CREDENTIALS" | "INVALID_TOKEN" | "INVALID_MFA_CODE" | "MFA_REQUIRED" | "EMAIL_NOT_VERIFIED" | "ACCOUNT_INACTIVE" | "CSRF_TOKEN_INVALID" | "PRECONDITION_REQUIRED";
         ErrorDetailDto: {
             field?: string;
             message: string;
@@ -4423,6 +4613,940 @@ export interface operations {
                         }[];
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
+                };
+            };
+        };
+    };
+    ReportsController_list_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                limit?: number;
+                categoryId?: string;
+                status?: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                from?: string;
+                to?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportsController_create_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                "Idempotency-Key": string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title: string;
+                    description: string;
+                    /** Format: uuid */
+                    categoryId: string;
+                    latitude: number;
+                    longitude: number;
+                    locationAccuracyM?: number | null;
+                    locationDescription?: string | null;
+                    /**
+                     * @default PUBLIC
+                     * @enum {string}
+                     */
+                    visibility?: "PUBLIC" | "PRIVATE";
+                    mediaIds: string[];
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            locationAccuracyM: number | null;
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            version: number;
+                            canEdit: boolean;
+                            canWithdraw: boolean;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportsController_mine_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                limit?: number;
+                status?: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    ReportsController_summary_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            total: number;
+                            byStatus: {
+                                [key: string]: number;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    ReportsController_get_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            locationAccuracyM: number | null;
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            version: number;
+                            canEdit: boolean;
+                            canWithdraw: boolean;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        } | {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportsController_update_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version being edited */
+                "If-Match": string;
+            };
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    title?: string;
+                    description?: string;
+                    /** Format: uuid */
+                    categoryId?: string;
+                    latitude?: number;
+                    longitude?: number;
+                    locationAccuracyM?: number | null;
+                    locationDescription?: string | null;
+                    /** @enum {string} */
+                    visibility?: "PUBLIC" | "PRIVATE";
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            locationAccuracyM: number | null;
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            version: number;
+                            canEdit: boolean;
+                            canWithdraw: boolean;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportsController_history_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {string|null} */
+                            fromStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE" | null;
+                            /** @enum {string} */
+                            toStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            publicMessage: string | null;
+                            reason: string | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportsController_withdraw_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            locationAccuracyM: number | null;
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            version: number;
+                            canEdit: boolean;
+                            canWithdraw: boolean;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminReportsController_triage_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            /** @enum {string} */
+                            routing: "UNROUTED" | "AMBIGUOUS";
+                            candidates: {
+                                /** Format: uuid */
+                                id: string;
+                                name: string;
+                            }[];
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            /** Format: date-time */
+                            submittedAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    AdminReportsController_route_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    organizationId: string;
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MediaController_createIntent_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    contentType: "image/jpeg" | "image/png" | "image/webp";
+                    byteSize: number;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            mediaId: string;
+                            uploadUrl: string;
+                            /** @enum {string} */
+                            method: "PUT";
+                            headers: {
+                                "Content-Type": string;
+                            };
+                            /** Format: date-time */
+                            expiresAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MediaController_confirm_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mediaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** @enum {string} */
+                            status: "PENDING_UPLOAD" | "UPLOADED" | "PROCESSED" | "REJECTED";
+                            rejectionReason: string | null;
+                            displayUrl: string | null;
+                            thumbnailUrl: string | null;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MediaController_view_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mediaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** @enum {string} */
+                            status: "PENDING_UPLOAD" | "UPLOADED" | "PROCESSED" | "REJECTED";
+                            rejectionReason: string | null;
+                            displayUrl: string | null;
+                            thumbnailUrl: string | null;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MediaController_remove_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                mediaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
                 };
             };
         };

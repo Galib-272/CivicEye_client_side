@@ -19,14 +19,36 @@ export function AuthNav() {
   return (
     <nav aria-label={t('mainLabel')}>
       <ul className="flex flex-wrap items-center gap-1">
+        <li>
+          <Link href="/reports" className={linkStyle}>
+            {t('publicReports')}
+          </Link>
+        </li>
         {auth ? (
           <>
+            <li>
+              <Link href="/reports/new" className={linkStyle}>
+                {t('report')}
+              </Link>
+            </li>
+            <li>
+              <Link href="/reports/mine" className={linkStyle}>
+                {t('myReports')}
+              </Link>
+            </li>
             {auth.user.platformRole === 'SUPER_ADMIN' && auth.mfa === 'verified' && (
-              <li>
-                <Link href="/admin/organizations" className={linkStyle}>
-                  {t('admin')}
-                </Link>
-              </li>
+              <>
+                <li>
+                  <Link href="/admin/reports/triage" className={linkStyle}>
+                    {t('triage')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/organizations" className={linkStyle}>
+                    {t('admin')}
+                  </Link>
+                </li>
+              </>
             )}
             <li>
               <Link href="/account" className={linkStyle}>

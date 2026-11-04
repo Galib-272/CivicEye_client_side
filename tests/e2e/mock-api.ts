@@ -39,7 +39,8 @@ export async function mockApi(page: Page, handlers: Record<string, Handler>) {
     const cors = {
       'access-control-allow-origin': 'http://localhost:3100',
       'access-control-allow-credentials': 'true',
-      'access-control-allow-headers': 'content-type, x-csrf-token, accept',
+      'access-control-allow-headers':
+        'content-type, x-csrf-token, accept, idempotency-key, if-match',
       'access-control-allow-methods': 'GET, POST, PATCH, PUT, DELETE',
     };
     if (request.method() === 'OPTIONS') {
