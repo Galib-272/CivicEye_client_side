@@ -4,6 +4,244 @@
  */
 
 export interface paths {
+    "/api/v1/auth/register": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Create an account. Responds identically whether or not the email is already registered. */
+        post: operations["AuthController_register_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Sign in with email and password. Sets the session cookie. */
+        post: operations["AuthController_login_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** End the current session. */
+        post: operations["AuthController_logout_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The signed-in user, the CSRF token for state-changing requests, and two-factor state. */
+        get: operations["AuthController_me_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/verify-email": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm an email address with the token from the verification email. */
+        post: operations["AuthController_verifyEmail_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/resend-verification": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Send a new verification email to the signed-in user. */
+        post: operations["AuthController_resendVerification_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/forgot-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Request a password reset email. Responds identically for every address. */
+        post: operations["AuthController_forgotPassword_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/reset-password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Set a new password with a reset token. Signs the account out everywhere. */
+        post: operations["AuthController_resetPassword_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/mfa": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Two-factor status of the signed-in user. */
+        get: operations["MfaController_status_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/mfa/setup": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start two-factor setup. Returns the secret to add to an authenticator app. */
+        post: operations["MfaController_setup_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/mfa/enable": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Confirm setup with a code. Returns backup codes, shown only once. */
+        post: operations["MfaController_enable_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/mfa/challenge": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Complete sign-in with an authenticator code or a backup code. */
+        post: operations["MfaController_challenge_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Signed-in devices for the current user. */
+        get: operations["SessionsController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/auth/sessions/{sessionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Sign out one of the current user’s devices. */
+        delete: operations["SessionsController_revoke_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/health/live": {
         parameters: {
             query?: never;
@@ -38,19 +276,81 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/users/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** The signed-in user’s profile. */
+        get: operations["UsersController_profile_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update the signed-in user’s name or language. */
+        patch: operations["UsersController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/users/me/password": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Change password. Signs out all other devices and renews the current session. */
+        patch: operations["UsersController_changePassword_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List users (Super Admin). */
+        get: operations["AdminUsersController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/users/{userId}/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Suspend, deactivate or reactivate a user (Super Admin). Ends their sessions. */
+        patch: operations["AdminUsersController_updateStatus_v1"];
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
-        LivenessDto: {
-            /** @enum {string} */
-            status: "ok";
-        };
-        ResponseMetaDto: {
-            requestId: string;
-        };
         /** @enum {string} */
-        ErrorCode: "VALIDATION_ERROR" | "UNAUTHENTICATED" | "FORBIDDEN" | "NOT_FOUND" | "CONFLICT" | "INVALID_STATE_TRANSITION" | "DUPLICATE_SUBMISSION" | "RATE_LIMITED" | "FILE_TOO_LARGE" | "UNSUPPORTED_FILE_TYPE" | "ORGANIZATION_NOT_ELIGIBLE" | "ASSIGNMENT_NOT_FOUND" | "AI_SERVICE_UNAVAILABLE" | "SERVICE_UNAVAILABLE" | "INTERNAL_ERROR";
+        ErrorCode: "VALIDATION_ERROR" | "UNAUTHENTICATED" | "FORBIDDEN" | "NOT_FOUND" | "CONFLICT" | "INVALID_STATE_TRANSITION" | "DUPLICATE_SUBMISSION" | "RATE_LIMITED" | "FILE_TOO_LARGE" | "UNSUPPORTED_FILE_TYPE" | "ORGANIZATION_NOT_ELIGIBLE" | "ASSIGNMENT_NOT_FOUND" | "AI_SERVICE_UNAVAILABLE" | "SERVICE_UNAVAILABLE" | "INTERNAL_ERROR" | "INVALID_CREDENTIALS" | "INVALID_TOKEN" | "INVALID_MFA_CODE" | "MFA_REQUIRED" | "EMAIL_NOT_VERIFIED" | "ACCOUNT_INACTIVE" | "CSRF_TOKEN_INVALID";
         ErrorDetailDto: {
             field?: string;
             message: string;
@@ -65,6 +365,13 @@ export interface components {
             /** @enum {boolean} */
             success: false;
             error: components["schemas"]["ErrorBodyDto"];
+        };
+        ResponseMetaDto: {
+            requestId: string;
+        };
+        LivenessDto: {
+            /** @enum {string} */
+            status: "ok";
         };
         ReadinessChecksDto: {
             /** @enum {string} */
@@ -86,6 +393,694 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    AuthController_register_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    /** Format: email */
+                    email: string;
+                    password: string;
+                    /** @enum {string} */
+                    preferredLocale?: "en" | "bn";
+                };
+            };
+        };
+        responses: {
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AuthController_login_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: email */
+                    email: string;
+                    password: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            user: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: email */
+                                email: string;
+                                name: string;
+                                /** @enum {string} */
+                                status: "PENDING_VERIFICATION" | "ACTIVE";
+                                /** @enum {string} */
+                                platformRole: "CITIZEN" | "SUPER_ADMIN";
+                                /** @enum {string} */
+                                preferredLocale: "en" | "bn";
+                                emailVerified: boolean;
+                            };
+                            csrfToken: string;
+                            /** @enum {string} */
+                            mfa: "none" | "pending" | "setup_required" | "verified";
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AuthController_logout_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    AuthController_me_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            user: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: email */
+                                email: string;
+                                name: string;
+                                /** @enum {string} */
+                                status: "PENDING_VERIFICATION" | "ACTIVE";
+                                /** @enum {string} */
+                                platformRole: "CITIZEN" | "SUPER_ADMIN";
+                                /** @enum {string} */
+                                preferredLocale: "en" | "bn";
+                                emailVerified: boolean;
+                            };
+                            csrfToken: string;
+                            /** @enum {string} */
+                            mfa: "none" | "pending" | "setup_required" | "verified";
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AuthController_verifyEmail_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    token: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AuthController_resendVerification_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AuthController_forgotPassword_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: email */
+                    email: string;
+                };
+            };
+        };
+        responses: {
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AuthController_resetPassword_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    token: string;
+                    newPassword: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MfaController_status_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            enabled: boolean;
+                            required: boolean;
+                            backupCodesRemaining: number;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    MfaController_setup_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            otpauthUri: string;
+                            secret: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MfaController_enable_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    code: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            backupCodes: string[];
+                            auth: {
+                                user: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    /** Format: email */
+                                    email: string;
+                                    name: string;
+                                    /** @enum {string} */
+                                    status: "PENDING_VERIFICATION" | "ACTIVE";
+                                    /** @enum {string} */
+                                    platformRole: "CITIZEN" | "SUPER_ADMIN";
+                                    /** @enum {string} */
+                                    preferredLocale: "en" | "bn";
+                                    emailVerified: boolean;
+                                };
+                                csrfToken: string;
+                                /** @enum {string} */
+                                mfa: "none" | "pending" | "setup_required" | "verified";
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MfaController_challenge_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    code: string;
+                } | {
+                    backupCode: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            user: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: email */
+                                email: string;
+                                name: string;
+                                /** @enum {string} */
+                                status: "PENDING_VERIFICATION" | "ACTIVE";
+                                /** @enum {string} */
+                                platformRole: "CITIZEN" | "SUPER_ADMIN";
+                                /** @enum {string} */
+                                preferredLocale: "en" | "bn";
+                                emailVerified: boolean;
+                            };
+                            csrfToken: string;
+                            /** @enum {string} */
+                            mfa: "none" | "pending" | "setup_required" | "verified";
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    SessionsController_list_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            current: boolean;
+                            ipAddress: string | null;
+                            userAgent: string | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            /** Format: date-time */
+                            lastSeenAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    SessionsController_revoke_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                sessionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
     HealthController_live_v1: {
         parameters: {
             query?: never;
@@ -133,6 +1128,331 @@ export interface operations {
                 };
             };
             503: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    UsersController_profile_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: email */
+                            email: string;
+                            name: string;
+                            /** @enum {string} */
+                            status: "PENDING_VERIFICATION" | "ACTIVE";
+                            /** @enum {string} */
+                            platformRole: "CITIZEN" | "SUPER_ADMIN";
+                            /** @enum {string} */
+                            preferredLocale: "en" | "bn";
+                            emailVerified: boolean;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    UsersController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    /** @enum {string} */
+                    preferredLocale?: "en" | "bn";
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: email */
+                            email: string;
+                            name: string;
+                            /** @enum {string} */
+                            status: "PENDING_VERIFICATION" | "ACTIVE";
+                            /** @enum {string} */
+                            platformRole: "CITIZEN" | "SUPER_ADMIN";
+                            /** @enum {string} */
+                            preferredLocale: "en" | "bn";
+                            emailVerified: boolean;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    UsersController_changePassword_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    currentPassword: string;
+                    newPassword: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            user: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: email */
+                                email: string;
+                                name: string;
+                                /** @enum {string} */
+                                status: "PENDING_VERIFICATION" | "ACTIVE";
+                                /** @enum {string} */
+                                platformRole: "CITIZEN" | "SUPER_ADMIN";
+                                /** @enum {string} */
+                                preferredLocale: "en" | "bn";
+                                emailVerified: boolean;
+                            };
+                            csrfToken: string;
+                            /** @enum {string} */
+                            mfa: "none" | "pending" | "setup_required" | "verified";
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            429: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminUsersController_list_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                limit?: number;
+                status?: "PENDING_VERIFICATION" | "ACTIVE" | "SUSPENDED" | "DEACTIVATED" | "DELETED";
+                role?: "CITIZEN" | "SUPER_ADMIN";
+                q?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: email */
+                            email: string;
+                            name: string;
+                            /** @enum {string} */
+                            status: "PENDING_VERIFICATION" | "ACTIVE" | "SUSPENDED" | "DEACTIVATED" | "DELETED";
+                            /** @enum {string} */
+                            platformRole: "CITIZEN" | "SUPER_ADMIN";
+                            emailVerified: boolean;
+                            mfaEnabled: boolean;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminUsersController_updateStatus_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                userId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    status: "ACTIVE" | "SUSPENDED" | "DEACTIVATED";
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: email */
+                            email: string;
+                            name: string;
+                            /** @enum {string} */
+                            status: "PENDING_VERIFICATION" | "ACTIVE" | "SUSPENDED" | "DEACTIVATED" | "DELETED";
+                            /** @enum {string} */
+                            platformRole: "CITIZEN" | "SUPER_ADMIN";
+                            emailVerified: boolean;
+                            mfaEnabled: boolean;
+                            /** Format: date-time */
+                            createdAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
                 headers: {
                     [name: string]: unknown;
                 };
