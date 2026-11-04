@@ -1,0 +1,41 @@
+{
+  "Metadata": {
+    "title": "CivicEye",
+    "description": "Report, track and resolve civic infrastructure issues."
+  },
+  "Layout": {
+    "skipToContent": "Skip to main content",
+    "languageSwitcherLabel": "Language",
+    "footerNote": "CivicEye is under active development."
+  },
+  "Home": {
+    "heading": "Report civic problems to the people responsible for fixing them",
+    "intro": "CivicEye will let residents report issues such as potholes, broken streetlights, drainage problems and garbage accumulation, and follow each report until the work is verified.",
+    "developmentNotice": "CivicEye is not yet open for reports. Submitting and tracking reports will be available in a future release.",
+    "emergencyNotice": "CivicEye is not an emergency service. For dangerous situations, contact your local emergency services."
+  },
+  "SystemStatus": {
+    "heading": "System status",
+    "description": "Live readiness of the CivicEye API and the services it depends on. This page is for development and operations only.",
+    "checking": "Checking…",
+    "refresh": "Check again",
+    "lastChecked": "Last checked: {time}",
+    "apiUnreachable": "The API could not be reached.",
+    "overall": "API readiness",
+    "component": {
+      "database": "Database",
+      "redis": "Redis"
+    },
+    "state": {
+      "up": "Available",
+      "down": "Unavailable",
+      "unknown": "Unknown"
+    },
+    "requestId": "Request ID: {id}"
+  },
+  "NotFound": {
+    "heading": "Page not found",
+    "body": "The page you are looking for does not exist.",
+    "home": "Go to the home page"
+  }
+}
