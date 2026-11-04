@@ -21,6 +21,13 @@ export function AuthNav() {
       <ul className="flex flex-wrap items-center gap-1">
         {auth ? (
           <>
+            {auth.user.platformRole === 'SUPER_ADMIN' && auth.mfa === 'verified' && (
+              <li>
+                <Link href="/admin/organizations" className={linkStyle}>
+                  {t('admin')}
+                </Link>
+              </li>
+            )}
             <li>
               <Link href="/account" className={linkStyle}>
                 {t('account')}

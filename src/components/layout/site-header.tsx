@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import { Link } from '@/i18n/navigation';
 import { AuthNav } from './auth-nav';
 import { LanguageSwitcher } from './language-switcher';
@@ -11,7 +12,10 @@ export function SiteHeader() {
         </Link>
         <div className="flex flex-wrap items-center gap-2">
           <AuthNav />
-          <LanguageSwitcher />
+          {/* Reads the current path, which on some pages is only known per request. */}
+          <Suspense fallback={<div className="h-9 w-32" aria-hidden="true" />}>
+            <LanguageSwitcher />
+          </Suspense>
         </div>
       </div>
     </header>

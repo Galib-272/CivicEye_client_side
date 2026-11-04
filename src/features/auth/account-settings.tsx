@@ -18,6 +18,7 @@ import {
   useUpdateProfile,
   type AuthState,
 } from './api';
+import { MyOrganizations } from '@/features/organizations/workspace';
 import { applyFieldErrors, errorMessage } from './server-errors';
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
@@ -291,6 +292,7 @@ export function AccountSettings({ auth }: { auth: AuthState }) {
   return (
     <div className="space-y-6">
       <ProfileSection auth={auth} />
+      <MyOrganizations />
       <PasswordSection />
       <TwoFactorSection />
       <SessionsSection />
