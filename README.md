@@ -6,8 +6,9 @@ repairs them, and an authorized person verifies the work.
 
 The API lives in a separate repository: [CivicEye_server_side](https://github.com/Galib-272/CivicEye_server_side).
 
-> **Status: Phase 1 (project foundation).** The app has a landing page and a development
-> diagnostics page only. Reporting, accounts and maps come in later phases.
+> **Status: Phase 2 (accounts and access control).** Sign-in, registration, email
+> verification, password reset, two-factor authentication and account settings are available in
+> English and Bangla. Reporting, organizations and maps come in later phases.
 
 ## Stack
 
@@ -60,6 +61,23 @@ types do not match the committed spec.
 | ---------------------------------- | -------- | ------- | ------------------------------------------------------------------------ |
 | `NEXT_PUBLIC_API_URL`              | yes      | —       | Base URL of the API                                                      |
 | `NEXT_PUBLIC_ENABLE_SYSTEM_STATUS` | no       | `false` | Show `/system-status` in production builds (always shown in development) |
+
+## Pages
+
+| Path                                          | Purpose                                                    |
+| --------------------------------------------- | ---------------------------------------------------------- |
+| `/sign-in`, `/register`                       | Sign in; create an account                                 |
+| `/verify-email#token=…`                       | Opened from the verification email                         |
+| `/forgot-password`, `/reset-password#token=…` | Request and complete a password reset                      |
+| `/two-factor`, `/two-factor/setup`            | Two-factor code at sign-in; set up an authenticator app    |
+| `/account`                                    | Profile, password, two-factor status and signed-in devices |
+
+All paths are prefixed with the language (`/en/…`, `/bn/…`). Email links carry their token in
+the URL fragment; pages read it, then remove it from the address bar and history.
+
+The session cookie is `HttpOnly`, so the app never sees it. The CSRF token from `/auth/me` is kept
+in memory and sent as `x-csrf-token` on state-changing requests. Pages hide what a user cannot
+do, but every rule is enforced by the API.
 
 ## Localization and accessibility
 
