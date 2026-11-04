@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens. Text/background pairs meet WCAG 2.2 AA contrast (4.5:1 for body text)
+ * in both light and dark schemes.
+ */
+:root {
+  --background: #ffffff;
+  --foreground: #14171a;
+  --muted: #4a5560;
+  --surface: #f4f6f8;
+  --surface-strong: #e3e8ed;
+  --border: #d0d7de;
+  --accent: #0b5cad;
+  --notice-bg: #fff8e1;
+  --notice-fg: #4d3b00;
+  --focus: #0b5cad;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0f1316;
+    --foreground: #e9edf1;
+    --muted: #a9b4be;
+    --surface: #182026;
+    --surface-strong: #25313a;
+    --border: #33414c;
+    --accent: #7db8f5;
+    --notice-bg: #2e2508;
+    --notice-fg: #f5dc8f;
+    --focus: #7db8f5;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-notice-bg: var(--notice-bg);
+  --color-notice-fg: var(--notice-fg);
+  --font-sans: var(--font-latin), var(--font-bengali), system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Visible keyboard focus on every interactive element (WCAG 2.4.7 / 2.4.11). */
+@utility focus-ring {
+  &:focus-visible {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
