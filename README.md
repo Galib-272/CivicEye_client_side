@@ -64,13 +64,17 @@ types do not match the committed spec.
 
 ## Pages
 
-| Path                                          | Purpose                                                    |
-| --------------------------------------------- | ---------------------------------------------------------- |
-| `/sign-in`, `/register`                       | Sign in; create an account                                 |
-| `/verify-email#token=…`                       | Opened from the verification email                         |
-| `/forgot-password`, `/reset-password#token=…` | Request and complete a password reset                      |
-| `/two-factor`, `/two-factor/setup`            | Two-factor code at sign-in; set up an authenticator app    |
-| `/account`                                    | Profile, password, two-factor status and signed-in devices |
+| Path                                          | Purpose                                                                                                                                       |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/sign-in`, `/register`                       | Sign in; create an account                                                                                                                    |
+| `/verify-email#token=…`                       | Opened from the verification email                                                                                                            |
+| `/forgot-password`, `/reset-password#token=…` | Request and complete a password reset                                                                                                         |
+| `/two-factor`, `/two-factor/setup`            | Two-factor code at sign-in; set up an authenticator app                                                                                       |
+| `/account`                                    | Profile, password, two-factor status and signed-in devices                                                                                    |
+| `/reports`, `/reports/[id]`                   | Public reports (no reporter, location rounded to about 100 m) and one report; the reporter sees the exact location, photos, edit and withdraw |
+| `/reports/new`                                | Report an issue: category, photos (uploaded straight to storage), map pin / device location / coordinates, visibility                         |
+| `/reports/mine`                               | The signed-in citizen's reports with a count per status                                                                                       |
+| `/admin/reports/triage`                       | Super Admins assign reports no single organization covers                                                                                     |
 
 All paths are prefixed with the language (`/en/…`, `/bn/…`). Email links carry their token in
 the URL fragment; pages read it, then remove it from the address bar and history.
@@ -78,6 +82,13 @@ the URL fragment; pages read it, then remove it from the address bar and history
 The session cookie is `HttpOnly`, so the app never sees it. The CSRF token from `/auth/me` is kept
 in memory and sent as `x-csrf-token` on state-changing requests. Pages hide what a user cannot
 do, but every rule is enforced by the API.
+
+## Maps
+
+The location picker uses [MapLibre GL](https://maplibre.org/) with free
+[OpenFreeMap](https://openfreemap.org/) tiles (OpenStreetMap data, no API key, no service
+guarantee). The provider must be confirmed before launch. Without WebGL the map is replaced by a
+message, and device location or typed coordinates still work.
 
 ## Localization and accessibility
 
