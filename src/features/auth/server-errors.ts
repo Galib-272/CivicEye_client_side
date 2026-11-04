@@ -14,6 +14,12 @@ const KNOWN_ERRORS = new Set([
   'SERVICE_UNAVAILABLE',
   'NETWORK_ERROR',
   'FORBIDDEN',
+  'CONFLICT',
+  'NOT_FOUND',
+  'INVALID_STATE_TRANSITION',
+  'ORGANIZATION_NOT_ELIGIBLE',
+  'FILE_TOO_LARGE',
+  'VALIDATION_ERROR',
 ]);
 
 const PASSWORD_ISSUES = new Set([
@@ -51,4 +57,16 @@ export function applyFieldErrors<T extends FieldValues>(
     applied = true;
   }
   return applied;
+}
+
+/**
+ * The server's own explanation for a validation error (for example why a map shape was
+ * rejected). It is English-only technical detail, shown under the translated message.
+ */
+export function errorDetail(error: unknown): string | undefined {
+  if (error instanceof ApiClientError && error.code === 'VALIDATION_ERROR') {
+    const detail = (error.details as Array<{ message?: string }>)[0]?.message;
+    return detail ?? error.message;
+  }
+  return undefined;
 }

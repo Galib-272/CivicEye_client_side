@@ -43,7 +43,8 @@
     "register": "Create account",
     "account": "Account",
     "signOut": "Sign out",
-    "mainLabel": "Account"
+    "mainLabel": "Account",
+    "admin": "Admin"
   },
   "Common": {
     "loading": "Loading…",
@@ -58,7 +59,8 @@
     "nameTooLong": "Use at most 100 characters.",
     "passwordsDontMatch": "The passwords do not match.",
     "codeFormat": "Enter the 6-digit code.",
-    "errorSummary": "Please correct the highlighted fields."
+    "errorSummary": "Please correct the highlighted fields.",
+    "invalidUrl": "Enter a full https:// address."
   },
   "Errors": {
     "INVALID_CREDENTIALS": "The email or password is incorrect.",
@@ -75,7 +77,13 @@
     "PASSWORD_TOO_SHORT": "Use at least 12 characters.",
     "PASSWORD_TOO_LONG": "Use at most 128 characters.",
     "PASSWORD_TOO_COMMON": "This password is too common or easy to guess.",
-    "PASSWORD_CONTAINS_PERSONAL_INFO": "Do not include your name or email address in your password."
+    "PASSWORD_CONTAINS_PERSONAL_INFO": "Do not include your name or email address in your password.",
+    "CONFLICT": "This change conflicts with the current state. Reload the page and try again.",
+    "NOT_FOUND": "This item was not found or you do not have access to it.",
+    "INVALID_STATE_TRANSITION": "This action is not available in the current state.",
+    "ORGANIZATION_NOT_ELIGIBLE": "This organization is suspended.",
+    "FILE_TOO_LARGE": "The file is too large. The limit is 5 MB.",
+    "VALIDATION_ERROR": "Some information is invalid. Check the details and try again."
   },
   "SignIn": {
     "title": "Sign in",
@@ -179,5 +187,152 @@
   "Languages": {
     "en": "English",
     "bn": "বাংলা (Bangla)"
+  },
+  "Roles": {
+    "ORG_ADMIN": "Administrator",
+    "ORG_REVIEWER": "Reviewer",
+    "WORKER": "Worker"
+  },
+  "VerificationState": {
+    "UNVERIFIED": "Not verified",
+    "PENDING_VERIFICATION": "Verification pending",
+    "VERIFIED": "Verified",
+    "REJECTED": "Rejected",
+    "SUSPENDED": "Suspended"
+  },
+  "OrganizationTypes": {
+    "CITY_CORPORATION": "City corporation"
+  },
+  "Org": {
+    "fields": {
+      "name": "Organization name",
+      "officialEmailDomain": "Official email domain",
+      "officialEmailDomainHint": "Government domain, for example dncc.gov.bd. The verification contact must use it.",
+      "description": "Description",
+      "website": "Website (https://…)",
+      "publicEmail": "Public contact email",
+      "publicPhone": "Public contact phone",
+      "type": "Type"
+    },
+    "save": "Save",
+    "saved": "Saved.",
+    "cancel": "Cancel",
+    "notSet": "Not set",
+    "membersHeading": "Members",
+    "noMembers": "No members yet.",
+    "inviteHeading": "Invite someone",
+    "inviteEmail": "Email address",
+    "inviteRole": "Role",
+    "inviteSend": "Send invitation",
+    "inviteSent": "Invitation sent to {email}.",
+    "pendingHeading": "Pending invitations",
+    "noPending": "No pending invitations.",
+    "expires": "Expires {date}",
+    "revoke": "Revoke",
+    "revokeLabel": "Revoke invitation for {email}",
+    "changeRoleLabel": "Role for {name}",
+    "remove": "Remove",
+    "removeLabel": "Remove {name}",
+    "confirmRemove": "Remove {name} from this organization?",
+    "lastAdmin": "The only administrator cannot be removed or given another role.",
+    "categoriesHeading": "Issue categories handled",
+    "categoriesHint": "Reports in these categories inside the service areas will be routed to this organization (from Phase 5).",
+    "noCategories": "No categories selected.",
+    "areasHeading": "Service areas",
+    "noAreas": "No service areas yet.",
+    "areaSize": "{area} km² · {points} points",
+    "inactive": "Inactive",
+    "areaPreviewLabel": "Outline of {name}",
+    "profileHeading": "Public profile",
+    "overviewHeading": "Overview",
+    "state": "Verification",
+    "memberCount": "Members: {count}",
+    "yourRole": "Your role: {role}"
+  },
+  "Workspace": {
+    "title": "Organization",
+    "myOrganizations": "My organizations",
+    "noOrganizations": "You are not a member of any organization.",
+    "open": "Open"
+  },
+  "AdminOrgs": {
+    "title": "Organizations",
+    "createHeading": "Create an organization",
+    "create": "Create organization",
+    "created": "Organization created.",
+    "listHeading": "All organizations",
+    "search": "Search by name",
+    "empty": "No organizations yet.",
+    "manage": "Manage",
+    "stateFilter": "Verification state",
+    "allStates": "All states",
+    "verificationHeading": "Verification",
+    "contactHeading": "Verification contact",
+    "contactName": "Contact name",
+    "contactTitle": "Job title",
+    "contactEmail": "Official email",
+    "contactHint": "Must be an address on @{domain}. We email them a confirmation link valid for 7 days.",
+    "sendContact": "Send confirmation link",
+    "contactSent": "Confirmation link sent.",
+    "contactConfirmed": "Confirmed on {date}",
+    "contactWaiting": "Waiting for confirmation (link expires {date})",
+    "reason": "Reason",
+    "reasonHint": "At least 5 characters. Recorded in the audit log.",
+    "verify": "Approve verification",
+    "reject": "Reject",
+    "suspend": "Suspend",
+    "reactivate": "Reactivate",
+    "verifyNeedsContact": "Approval is available after the contact confirms.",
+    "historyHeading": "Verification history",
+    "noHistory": "No decisions yet.",
+    "historyItem": "{from} → {to} by {by}",
+    "uploadHeading": "Add a service area",
+    "areaName": "Area name",
+    "areaFile": "GeoJSON file",
+    "areaFileHint": "Polygon or MultiPolygon in WGS84 longitude/latitude, at most 5 MB, 50,000 points and 10,000 km². Invalid shapes are rejected, not repaired.",
+    "upload": "Upload",
+    "uploaded": "Service area added.",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "overlapsHeading": "Overlapping service areas",
+    "noOverlaps": "No overlaps between organizations.",
+    "overlapItem": "{a} ({orgA}) and {b} ({orgB}) overlap by {area} km²",
+    "overlapNote": "The overlap policy is still open, so overlaps are listed but not resolved automatically.",
+    "categoriesNav": "Categories",
+    "back": "All organizations"
+  },
+  "AdminCategories": {
+    "title": "Categories",
+    "createHeading": "Add a category",
+    "slug": "Identifier",
+    "slugHint": "Lowercase letters, numbers and hyphens, e.g. open-manhole.",
+    "nameEn": "English name",
+    "nameBn": "Bangla name",
+    "parent": "Parent category",
+    "noParent": "None (top level)",
+    "order": "Display order",
+    "create": "Add category",
+    "created": "Category added.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "deactivate": "Deactivate",
+    "activate": "Activate",
+    "reviewNote": "Bangla names need review by a native speaker."
+  },
+  "Invitation": {
+    "title": "Accept invitation",
+    "signInFirst": "Sign in with the email address the invitation was sent to, then return to this page.",
+    "signIn": "Sign in",
+    "register": "Create an account",
+    "accept": "Accept invitation",
+    "accepted": "You joined {organization} as {role}.",
+    "openWorkspace": "Open the organization",
+    "missingToken": "This invitation link is incomplete. Open the link from your email again."
+  },
+  "ContactConfirm": {
+    "title": "Confirm organization verification",
+    "confirming": "Confirming…",
+    "confirmed": "Thank you. You have confirmed that {organization} is using CivicEye. A CivicEye administrator will complete the verification.",
+    "missingToken": "This link is incomplete. Open the link from your email again."
   }
 }
