@@ -31,13 +31,39 @@ function isErrorEnvelope(body: unknown): body is ApiErrorBody {
   );
 }
 
+const SAFE_METHODS = new Set(['GET', 'HEAD', 'OPTIONS']);
+
+// The CSRF token comes from the API (login and /auth/me responses) and is held in memory only.
+let csrfToken: string | undefined;
+
+export function setCsrfToken(token: string | undefined): void {
+  csrfToken = token;
+}
+
 export function createApiClient(baseUrl: string = parsePublicEnv().NEXT_PUBLIC_API_URL) {
-  return createClient<paths>({
+  const client = createClient<paths>({
     baseUrl,
-    // Session cookies (Phase 2) are sent to the API origin.
+    // The HttpOnly session cookie is sent to the API origin.
     credentials: 'include',
     headers: { Accept: 'application/json' },
   });
+  client.use({
+    onRequest({ request }) {
+      if (!SAFE_METHODS.has(request.method) && csrfToken) {
+        request.headers.set('x-csrf-token', csrfToken);
+      }
+      return request;
+    },
+  });
+  return client;
+}
+
+let sharedClient: ReturnType<typeof createApiClient> | undefined;
+
+/** The browser's API client. Created on first use so tests can stub fetch beforehand. */
+export function apiClient(): ReturnType<typeof createApiClient> {
+  sharedClient ??= createApiClient();
+  return sharedClient;
 }
 
 /**

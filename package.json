@@ -17,12 +17,15 @@
     "api:sync": "node -e \"require('fs').copyFileSync('../civiceye_server_side/openapi/openapi.json','openapi/openapi.json')\" && npm run api:types"
   },
   "dependencies": {
+    "@hookform/resolvers": "^7.0.2",
     "@tanstack/react-query": "^5.105.3",
     "next": "16.4.5",
     "next-intl": "^4.14.9",
     "openapi-fetch": "^0.17.0",
+    "qrcode": "^1.5.4",
     "react": "19.3.0",
     "react-dom": "19.3.0",
+    "react-hook-form": "^7.91.0",
     "zod": "^4.6.7"
   },
   "devDependencies": {
@@ -34,6 +37,7 @@
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.8",
     "@types/node": "^24.19.2",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^6.2.1",

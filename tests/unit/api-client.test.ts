@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
-import { ApiClientError, callApi, createApiClient } from '@/lib/api/client';
+import { ApiClientError, callApi, createApiClient, setCsrfToken } from '@/lib/api/client';
 
 function jsonResponse(status: number, body: unknown, requestId = 'req-header-id') {
   return new Response(JSON.stringify(body), {
@@ -18,7 +18,26 @@ function clientReturning(response: Response | Error) {
 }
 
 describe('API client', () => {
-  afterEach(() => vi.unstubAllGlobals());
+  afterEach(() => {
+    vi.unstubAllGlobals();
+    setCsrfToken(undefined);
+  });
+
+  it('sends the CSRF token on state-changing requests only', async () => {
+    setCsrfToken('csrf-token-value');
+    const ok = () =>
+      jsonResponse(200, { success: true, data: { accepted: true }, meta: { requestId: 'r' } });
+    const fetchMock = vi.fn(() => Promise.resolve(ok()));
+    vi.stubGlobal('fetch', fetchMock);
+    const client = createApiClient('http://api.test');
+
+    await callApi(() => client.POST('/api/v1/auth/logout'));
+    await callApi(() => client.GET('/api/v1/health/live'));
+
+    const [post, get] = fetchMock.mock.calls.map((call) => (call as unknown as [Request])[0]);
+    expect(post?.headers.get('x-csrf-token')).toBe('csrf-token-value');
+    expect(get?.headers.get('x-csrf-token')).toBeNull();
+  });
 
   it('returns envelope data on success and sends cookies', async () => {
     const { client, fetchMock } = clientReturning(
