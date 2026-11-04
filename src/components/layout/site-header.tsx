@@ -1,4 +1,5 @@
 import { Link } from '@/i18n/navigation';
+import { AuthNav } from './auth-nav';
 import { LanguageSwitcher } from './language-switcher';
 
 export function SiteHeader() {
@@ -8,7 +9,10 @@ export function SiteHeader() {
         <Link href="/" className="focus-ring rounded-md text-lg font-semibold tracking-tight">
           CivicEye
         </Link>
-        <LanguageSwitcher />
+        <div className="flex flex-wrap items-center gap-2">
+          <AuthNav />
+          <LanguageSwitcher />
+        </div>
       </div>
     </header>
   );
