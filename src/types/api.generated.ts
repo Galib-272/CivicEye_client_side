@@ -345,6 +345,542 @@ export interface paths {
         patch: operations["AdminUsersController_updateStatus_v1"];
         trace?: never;
     };
+    "/api/v1/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Active issue categories, parents followed by their children. */
+        get: operations["CategoriesController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** All categories, including inactive ones (Super Admin). */
+        get: operations["AdminCategoriesController_list_v1"];
+        put?: never;
+        /** Create a category (Super Admin). */
+        post: operations["AdminCategoriesController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/categories/{categoryId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Update or deactivate a category (Super Admin). */
+        patch: operations["AdminCategoriesController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List organizations (Super Admin). */
+        get: operations["AdminOrganizationsController_list_v1"];
+        put?: never;
+        /** Create an organization (Super Admin). */
+        post: operations["AdminOrganizationsController_create_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Organization details including verification (Super Admin). */
+        get: operations["AdminOrganizationsController_detail_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit any organization field (Super Admin). */
+        patch: operations["AdminOrganizationsController_update_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/verification-contact": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Name the verification contact (on the official domain) and email them a confirmation link. */
+        put: operations["AdminOrganizationsController_setContact_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Approve verification once the contact has confirmed. */
+        post: operations["AdminOrganizationsController_verify_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/reject": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reject verification (reason required). */
+        post: operations["AdminOrganizationsController_reject_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/suspend": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Suspend a verified organization; members lose access (reason required). */
+        post: operations["AdminOrganizationsController_suspend_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/reactivate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Reactivate a suspended organization (reason required). */
+        post: operations["AdminOrganizationsController_reactivate_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set the categories an organization handles (Super Admin). */
+        put: operations["AdminOrganizationsController_setCategories_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Members of an organization (Super Admin). */
+        get: operations["AdminOrganizationsController_members_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/invitations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Pending invitations of an organization (Super Admin). */
+        get: operations["AdminOrganizationsController_invitations_v1"];
+        put?: never;
+        /** Invite someone, e.g. the first Org Admin (Super Admin). */
+        post: operations["AdminOrganizationsController_invite_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/invitations/{invitationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Revoke a pending invitation (Super Admin). */
+        delete: operations["AdminOrganizationsController_revokeInvitation_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/members/{memberId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a member (Super Admin). */
+        delete: operations["AdminOrganizationsController_removeMember_v1"];
+        options?: never;
+        head?: never;
+        /** Change a member’s role (Super Admin). */
+        patch: operations["AdminOrganizationsController_changeRole_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/organizations/{organizationId}/service-areas": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Service areas of an organization (Super Admin). */
+        get: operations["AdminOrganizationsController_listServiceAreas_v1"];
+        put?: never;
+        /** Upload a service area as a GeoJSON file (Polygon/MultiPolygon, WGS84, at most 5 MB). */
+        post: operations["AdminOrganizationsController_createServiceArea_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/service-areas/{serviceAreaId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Rename or (de)activate a service area (Super Admin). */
+        patch: operations["AdminOrganizationsController_updateServiceArea_v1"];
+        trace?: never;
+    };
+    "/api/v1/admin/service-areas/overlaps": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Overlapping active service areas of different organizations. */
+        get: operations["AdminOrganizationsController_overlaps_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/users/me/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Organizations the signed-in user is an active member of. */
+        get: operations["OrganizationEnrollmentController_mine_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/invitations/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept an invitation. Requires a verified email matching the invited address. */
+        post: operations["OrganizationEnrollmentController_accept_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organization-contacts/confirm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Verification contact confirms with the emailed link. */
+        post: operations["OrganizationEnrollmentController_confirmContact_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/locations/organization-match": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Verified organizations whose service areas cover a WGS84 point (optionally for a category). */
+        post: operations["OrganizationEnrollmentController_match_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public directory of verified organizations. */
+        get: operations["OrganizationsController_list_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public profile of a verified organization. */
+        get: operations["OrganizationsController_profile_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /** Edit the public profile (Org Admin). */
+        patch: operations["OrganizationsController_updateProfile_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/overview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Workspace overview for members of this organization. */
+        get: operations["OrganizationsController_overview_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Members of this organization. */
+        get: operations["OrganizationsController_members_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/invitations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Pending invitations (Org Admin). */
+        get: operations["OrganizationsController_invitations_v1"];
+        put?: never;
+        /** Invite someone to this organization (Org Admin). */
+        post: operations["OrganizationsController_invite_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/invitations/{invitationId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Revoke a pending invitation (Org Admin). */
+        delete: operations["OrganizationsController_revokeInvitation_v1"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/members/{memberId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /** Remove a member (Org Admin). The last administrator cannot be removed. */
+        delete: operations["OrganizationsController_removeMember_v1"];
+        options?: never;
+        head?: never;
+        /** Change a member’s role (Org Admin). */
+        patch: operations["OrganizationsController_changeRole_v1"];
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/categories": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Set the categories this organization handles (Org Admin). */
+        put: operations["OrganizationsController_setCategories_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/service-areas": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Service areas of this organization (read-only for members). */
+        get: operations["OrganizationsController_serviceAreasList_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1458,6 +1994,2435 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    CategoriesController_list_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            slug: string;
+                            /** Format: uuid */
+                            parentId: string | null;
+                            nameEn: string;
+                            nameBn: string;
+                            descriptionEn: string | null;
+                            descriptionBn: string | null;
+                            isActive: boolean;
+                            displayOrder: number;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    AdminCategoriesController_list_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            slug: string;
+                            /** Format: uuid */
+                            parentId: string | null;
+                            nameEn: string;
+                            nameBn: string;
+                            descriptionEn: string | null;
+                            descriptionBn: string | null;
+                            isActive: boolean;
+                            displayOrder: number;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    AdminCategoriesController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    slug: string;
+                    /** Format: uuid */
+                    parentId?: string | null;
+                    nameEn: string;
+                    nameBn: string;
+                    descriptionEn?: string | null;
+                    descriptionBn?: string | null;
+                    displayOrder?: number;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            slug: string;
+                            /** Format: uuid */
+                            parentId: string | null;
+                            nameEn: string;
+                            nameBn: string;
+                            descriptionEn: string | null;
+                            descriptionBn: string | null;
+                            isActive: boolean;
+                            displayOrder: number;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminCategoriesController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                categoryId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    parentId?: string | null;
+                    nameEn?: string;
+                    nameBn?: string;
+                    descriptionEn?: string | null;
+                    descriptionBn?: string | null;
+                    displayOrder?: number;
+                    isActive?: boolean;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            slug: string;
+                            /** Format: uuid */
+                            parentId: string | null;
+                            nameEn: string;
+                            nameBn: string;
+                            descriptionEn: string | null;
+                            descriptionBn: string | null;
+                            isActive: boolean;
+                            displayOrder: number;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_list_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                limit?: number;
+                q?: string;
+                verificationState?: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_create_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    /**
+                     * @default CITY_CORPORATION
+                     * @enum {string}
+                     */
+                    type?: "CITY_CORPORATION";
+                    officialEmailDomain: string;
+                    description?: string | null;
+                    /** Format: uri */
+                    website?: string | null;
+                    /** Format: email */
+                    publicEmail?: string | null;
+                    publicPhone?: string | null;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_detail_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_update_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    officialEmailDomain?: string;
+                    description?: string | null;
+                    /** Format: uri */
+                    website?: string | null;
+                    /** Format: email */
+                    publicEmail?: string | null;
+                    publicPhone?: string | null;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_setContact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name: string;
+                    jobTitle: string;
+                    /** Format: email */
+                    email: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_verify_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_reject_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_suspend_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_reactivate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_setCategories_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    categoryIds: string[];
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                            verificationContact: {
+                                name: string;
+                                jobTitle: string;
+                                email: string;
+                                /** Format: date-time */
+                                confirmedAt: string | null;
+                                /** Format: date-time */
+                                linkExpiresAt: string | null;
+                            } | null;
+                            verificationHistory: {
+                                /** @enum {string} */
+                                fromState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                /** @enum {string} */
+                                toState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                                reason: string | null;
+                                decidedBy: string;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_members_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            joinedAt: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_invitations_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            expiresAt: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_invite_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: email */
+                    email: string;
+                    /** @enum {string} */
+                    role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            expiresAt: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_revokeInvitation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                invitationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_removeMember_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                memberId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            joinedAt: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_changeRole_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                memberId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            joinedAt: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_listServiceAreas_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            organizationId: string;
+                            name: string;
+                            areaSqKm: number;
+                            pointCount: number;
+                            isActive: boolean;
+                            /** Format: date-time */
+                            createdAt: string;
+                            previewGeoJson: {
+                                /** @enum {string} */
+                                type: "MultiPolygon";
+                                coordinates: number[][][][];
+                            };
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_createServiceArea_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "multipart/form-data": {
+                    name: string;
+                    /** Format: binary */
+                    file: string;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            organizationId: string;
+                            name: string;
+                            areaSqKm: number;
+                            pointCount: number;
+                            isActive: boolean;
+                            /** Format: date-time */
+                            createdAt: string;
+                            previewGeoJson: {
+                                /** @enum {string} */
+                                type: "MultiPolygon";
+                                coordinates: number[][][][];
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            413: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_updateServiceArea_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                serviceAreaId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    name?: string;
+                    isActive?: boolean;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            organizationId: string;
+                            name: string;
+                            areaSqKm: number;
+                            pointCount: number;
+                            isActive: boolean;
+                            /** Format: date-time */
+                            createdAt: string;
+                            previewGeoJson: {
+                                /** @enum {string} */
+                                type: "MultiPolygon";
+                                coordinates: number[][][][];
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminOrganizationsController_overlaps_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            areaId: string;
+                            areaName: string;
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            /** Format: uuid */
+                            otherAreaId: string;
+                            otherAreaName: string;
+                            /** Format: uuid */
+                            otherOrganizationId: string;
+                            otherOrganizationName: string;
+                            overlapSqKm: number;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    OrganizationEnrollmentController_mine_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    OrganizationEnrollmentController_accept_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    token: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationEnrollmentController_confirmContact_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    token: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            organizationName: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationEnrollmentController_match_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    latitude: number;
+                    longitude: number;
+                    /** Format: uuid */
+                    categoryId?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_list_v1: {
+        parameters: {
+            query?: {
+                page?: number;
+                limit?: number;
+                q?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    OrganizationsController_profile_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_updateProfile_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    description?: string | null;
+                    /** Format: uri */
+                    website?: string | null;
+                    /** Format: email */
+                    publicEmail?: string | null;
+                    publicPhone?: string | null;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_overview_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_members_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            joinedAt: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    OrganizationsController_invitations_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            expiresAt: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    OrganizationsController_invite_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: email */
+                    email: string;
+                    /** @enum {string} */
+                    role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            expiresAt: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_revokeInvitation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                invitationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            accepted: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_removeMember_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                memberId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            joinedAt: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_changeRole_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                memberId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            email: string;
+                            /** @enum {string} */
+                            role: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER";
+                            /** Format: date-time */
+                            joinedAt: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_setCategories_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    categoryIds: string[];
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            /** @enum {string} */
+                            type: "CITY_CORPORATION";
+                            description: string | null;
+                            website: string | null;
+                            publicEmail: string | null;
+                            publicPhone: string | null;
+                            officialEmailDomain: string;
+                            /** @enum {string} */
+                            verificationState: "UNVERIFIED" | "PENDING_VERIFICATION" | "VERIFIED" | "REJECTED" | "SUSPENDED";
+                            isActive: boolean;
+                            memberCount: number;
+                            categoryIds: string[];
+                            /** @enum {string|null} */
+                            myRole: "ORG_ADMIN" | "ORG_REVIEWER" | "WORKER" | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationsController_serviceAreasList_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** Format: uuid */
+                            organizationId: string;
+                            name: string;
+                            areaSqKm: number;
+                            pointCount: number;
+                            isActive: boolean;
+                            /** Format: date-time */
+                            createdAt: string;
+                            previewGeoJson: {
+                                /** @enum {string} */
+                                type: "MultiPolygon";
+                                coordinates: number[][][][];
+                            };
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
                 };
             };
         };
