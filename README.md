@@ -6,9 +6,9 @@ repairs them, and an authorized person verifies the work.
 
 The API lives in a separate repository: [CivicEye_server_side](https://github.com/Galib-272/CivicEye_server_side).
 
-> **Status: Phase 2 (accounts and access control).** Sign-in, registration, email
-> verification, password reset, two-factor authentication and account settings are available in
-> English and Bangla. Reporting, organizations and maps come in later phases.
+> **Status: Phase 3 (organizations).** Accounts, two-factor and account settings, plus
+> organization administration, organization workspaces and invitations, in English and Bangla.
+> Reporting and maps come in later phases.
 
 ## Stack
 
