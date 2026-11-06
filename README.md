@@ -75,6 +75,9 @@ types do not match the committed spec.
 | `/reports/new`                                | Report an issue: category, photos (uploaded straight to storage), map pin / device location / coordinates, visibility                         |
 | `/reports/mine`                               | The signed-in citizen's reports with a count per status                                                                                       |
 | `/admin/reports/triage`                       | Super Admins assign reports no single organization covers                                                                                     |
+| `/organizations/[id]/reports`                 | Review queue for Org Admins and Reviewers, by status tab                                                                                      |
+| `/organizations/[id]/reports/[reportId]`      | Review workspace: decisions, information requests, transfer, internal notes, public updates                                                   |
+| `/admin/reports/[reportId]`                   | Super Admin read-only view of any report (audited), with moderation of public updates                                                         |
 
 All paths are prefixed with the language (`/en/…`, `/bn/…`). Email links carry their token in
 the URL fragment; pages read it, then remove it from the address bar and history.
@@ -89,6 +92,10 @@ The location picker uses [MapLibre GL](https://maplibre.org/) with free
 [OpenFreeMap](https://openfreemap.org/) tiles (OpenStreetMap data, no API key, no service
 guarantee). The provider must be confirmed before launch. Without WebGL the map is replaced by a
 message, and device location or typed coordinates still work.
+
+MapLibre draws the map in a background worker that it looks for next to its own code, which
+does not exist once Next.js bundles it. `scripts/copy-map-worker.mjs` copies the installed
+worker to `public/vendor/` before `dev` and `build`, and the map points MapLibre at it.
 
 ## Localization and accessibility
 
