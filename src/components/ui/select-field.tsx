@@ -7,7 +7,7 @@ interface SelectFieldProps extends Omit<SelectHTMLAttributes<HTMLSelectElement>,
   error?: string;
   /** Visually hidden label, for compact table rows where context is clear. */
   hideLabel?: boolean;
-  options: Array<{ value: string; label: string }>;
+  options: Array<{ value: string; label: string; disabled?: boolean }>;
 }
 
 export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(function SelectField(
@@ -29,7 +29,7 @@ export const SelectField = forwardRef<HTMLSelectElement, SelectFieldProps>(funct
         {...select}
       >
         {options.map((option) => (
-          <option key={option.value} value={option.value}>
+          <option key={option.value} value={option.value} disabled={option.disabled}>
             {option.label}
           </option>
         ))}
