@@ -46,12 +46,22 @@ function useStoreAuthState() {
   };
 }
 
+/**
+ * True for a few seconds after the user presses "Sign out", so pages that need a signed-in
+ * user let the sign-out button take them home instead of redirecting to the sign-in page.
+ */
+let signedOutAt = 0;
+export const isSigningOut = () => Date.now() - signedOutAt < 5_000;
+
 export function useLogin() {
   const store = useStoreAuthState();
   return useMutation({
     mutationFn: (body: { email: string; password: string }) =>
       callApi(() => apiClient().POST('/api/v1/auth/login', { body })),
-    onSuccess: store,
+    onSuccess: (state) => {
+      signedOutAt = 0;
+      store(state);
+    },
   });
 }
 
@@ -60,6 +70,9 @@ export function useLogout() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => callApi(() => apiClient().POST('/api/v1/auth/logout')),
+    onMutate: () => {
+      signedOutAt = Date.now();
+    },
     onSettled: () => {
       store(null);
       queryClient.removeQueries({ predicate: (query) => query.queryKey[0] !== 'auth' });

@@ -3,7 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, type ReactNode } from 'react';
 import { usePathname, useRouter } from '@/i18n/navigation';
-import { useAuthState, type AuthState } from './api';
+import { isSigningOut, useAuthState, type AuthState } from './api';
 import { mfaRedirect } from './navigation';
 
 /**
@@ -26,7 +26,9 @@ export function RequireAuth({
 
   const redirect =
     auth === null
-      ? `/sign-in?next=${encodeURIComponent(pathname)}`
+      ? isSigningOut()
+        ? null
+        : `/sign-in?next=${encodeURIComponent(pathname)}`
       : auth && !allowIncompleteMfa
         ? mfaRedirect(auth.mfa, pathname)
         : null;
