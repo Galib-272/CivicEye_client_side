@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useLogout, useAuthState } from '@/features/auth/api';
+import { useWorkMemberships } from '@/features/work/api';
 import { Link, useRouter } from '@/i18n/navigation';
 
 const linkStyle =
@@ -10,6 +11,10 @@ const linkStyle =
 export function AuthNav() {
   const t = useTranslations('Nav');
   const { data: auth, isPending } = useAuthState();
+  // Only workers get the "My tasks" link.
+  const workMemberships = useWorkMemberships(
+    !!auth && (auth.mfa === 'none' || auth.mfa === 'verified'),
+  );
   const logout = useLogout();
   const router = useRouter();
 
@@ -36,6 +41,13 @@ export function AuthNav() {
                 {t('myReports')}
               </Link>
             </li>
+            {(workMemberships.data?.length ?? 0) > 0 && (
+              <li>
+                <Link href="/work" className={linkStyle}>
+                  {t('myTasks')}
+                </Link>
+              </li>
+            )}
             {auth.user.platformRole === 'SUPER_ADMIN' && auth.mfa === 'verified' && (
               <>
                 <li>

@@ -60,12 +60,20 @@ const workspaceReport = (overrides: Record<string, unknown> = {}) => ({
   photos: [],
   informationRequests: [],
   rejection: null,
+  assignments: [],
+  feedback: [],
   actions: {
     startReview: true,
     requestInformation: false,
     accept: false,
     reject: false,
     transfer: true,
+    assign: false,
+    reassign: false,
+    cancelAssignment: false,
+    verify: false,
+    reopen: false,
+    close: false,
   },
   ...overrides,
 });
@@ -155,6 +163,12 @@ test.describe('organization review', () => {
             accept: true,
             reject: true,
             transfer: true,
+            assign: false,
+            reassign: false,
+            cancelAssignment: false,
+            verify: false,
+            reopen: false,
+            close: false,
           },
         });
         return ok(current);
@@ -179,6 +193,12 @@ test.describe('organization review', () => {
             accept: false,
             reject: false,
             transfer: true,
+            assign: false,
+            reassign: false,
+            cancelAssignment: false,
+            verify: false,
+            reopen: false,
+            close: false,
           },
         });
         return ok(current);
@@ -276,6 +296,9 @@ test.describe('citizen side of review', () => {
     },
     rejection: null,
     photos: [],
+    completion: null,
+    canGiveFeedback: false,
+    feedback: null,
   };
 
   test('the citizen answers an information request', async ({ page }) => {
@@ -364,6 +387,12 @@ test('a Super Admin can view any report and hide an update', async ({ page }) =>
             accept: false,
             reject: false,
             transfer: false,
+            assign: false,
+            reassign: false,
+            cancelAssignment: false,
+            verify: false,
+            reopen: false,
+            close: false,
           },
         }),
       ),

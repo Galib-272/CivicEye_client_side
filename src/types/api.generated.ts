@@ -1344,6 +1344,312 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/workers": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Active workers with availability and current workload. */
+        get: operations["OrganizationWorkController_workers_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/assign": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** ACCEPTED or REOPENED → ASSIGNED to an available worker. */
+        post: operations["OrganizationWorkController_assign_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/reassign": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Move the task to another worker, with a reason. */
+        post: operations["OrganizationWorkController_reassign_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/cancel-assignment": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel the open assignment (back to ACCEPTED), with a reason. */
+        post: operations["OrganizationWorkController_cancel_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/verify": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Verify completion evidence: APPROVED → RESOLVED; REJECTED or NEEDS_MORE_EVIDENCE → IN_PROGRESS. Never your own work. */
+        post: operations["OrganizationWorkController_verify_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/reopen": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** RESOLVED → REOPENED, with a reason. */
+        post: operations["OrganizationWorkController_reopen_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/close": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** RESOLVED → CLOSED. */
+        post: operations["OrganizationWorkController_close_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{publicId}/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Tell the organization whether the resolved issue is fixed. Feedback never changes the status. */
+        post: operations["ReportFeedbackController_feedback_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/memberships": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Organizations where you are a worker, with your availability. */
+        get: operations["WorkController_memberships_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/memberships/{organizationId}/availability": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Mark yourself available or unavailable for new tasks. */
+        put: operations["WorkController_availability_v1"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your tasks in one group, oldest first. */
+        get: operations["WorkController_tasks_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** One of your tasks. The reporter is never shown. */
+        get: operations["WorkController_task_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept the task. */
+        post: operations["WorkController_accept_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}/decline": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Decline the task before starting, with a reason. */
+        post: operations["WorkController_decline_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}/start": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start work (ASSIGNED → IN_PROGRESS). */
+        post: operations["WorkController_start_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}/progress": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Add a progress note, optionally with photos (purpose WORK_PHOTO). */
+        post: operations["WorkController_progress_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}/return": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Hand the task back (unsafe, inaccessible, partly done), with a reason. */
+        post: operations["WorkController_returnTask_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/work/tasks/{assignmentId}/complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Submit completion evidence (description and 1–5 after photos) for verification. */
+        post: operations["WorkController_complete_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/media/upload-intent": {
         parameters: {
             query?: never;
@@ -5094,6 +5400,22 @@ export interface operations {
                                 thumbnailUrl: string | null;
                                 displayUrl: string | null;
                             }[];
+                            completion: {
+                                description: string;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                                /** Format: date-time */
+                                resolvedAt: string;
+                            } | null;
+                            canGiveFeedback: boolean;
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                            } | null;
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -5284,6 +5606,22 @@ export interface operations {
                                 thumbnailUrl: string | null;
                                 displayUrl: string | null;
                             }[];
+                            completion: {
+                                description: string;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                                /** Format: date-time */
+                                resolvedAt: string;
+                            } | null;
+                            canGiveFeedback: boolean;
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                            } | null;
                         } | {
                             publicId: string;
                             title: string;
@@ -5405,6 +5743,22 @@ export interface operations {
                                 thumbnailUrl: string | null;
                                 displayUrl: string | null;
                             }[];
+                            completion: {
+                                description: string;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                                /** Format: date-time */
+                                resolvedAt: string;
+                            } | null;
+                            canGiveFeedback: boolean;
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                            } | null;
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -5610,6 +5964,22 @@ export interface operations {
                                 thumbnailUrl: string | null;
                                 displayUrl: string | null;
                             }[];
+                            completion: {
+                                description: string;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                                /** Format: date-time */
+                                resolvedAt: string;
+                            } | null;
+                            canGiveFeedback: boolean;
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                            } | null;
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -5721,6 +6091,22 @@ export interface operations {
                                 thumbnailUrl: string | null;
                                 displayUrl: string | null;
                             }[];
+                            completion: {
+                                description: string;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                                /** Format: date-time */
+                                resolvedAt: string;
+                            } | null;
+                            canGiveFeedback: boolean;
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                            } | null;
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -5943,12 +6329,80 @@ export interface operations {
                                 reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
                                 message: string;
                             } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
                             actions: {
                                 startReview: boolean;
                                 requestInformation: boolean;
                                 accept: boolean;
                                 reject: boolean;
                                 transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -6149,7 +6603,7 @@ export interface operations {
     OrganizationReportsController_queue_v1: {
         parameters: {
             query?: {
-                tab?: "NEW" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "CLOSED";
+                tab?: "NEW" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "IN_WORK" | "TO_VERIFY" | "RESOLVED" | "CLOSED";
                 categoryId?: string;
                 page?: number;
                 limit?: number;
@@ -6326,12 +6780,80 @@ export interface operations {
                                 reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
                                 message: string;
                             } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
                             actions: {
                                 startReview: boolean;
                                 requestInformation: boolean;
                                 accept: boolean;
                                 reject: boolean;
                                 transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -6469,12 +6991,80 @@ export interface operations {
                                 reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
                                 message: string;
                             } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
                             actions: {
                                 startReview: boolean;
                                 requestInformation: boolean;
                                 accept: boolean;
                                 reject: boolean;
                                 transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -6597,12 +7187,80 @@ export interface operations {
                                 reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
                                 message: string;
                             } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
                             actions: {
                                 startReview: boolean;
                                 requestInformation: boolean;
                                 accept: boolean;
                                 reject: boolean;
                                 transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -6735,12 +7393,80 @@ export interface operations {
                                 reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
                                 message: string;
                             } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
                             actions: {
                                 startReview: boolean;
                                 requestInformation: boolean;
                                 accept: boolean;
                                 reject: boolean;
                                 transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -6873,12 +7599,80 @@ export interface operations {
                                 reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
                                 message: string;
                             } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
                             actions: {
                                 startReview: boolean;
                                 requestInformation: boolean;
                                 accept: boolean;
                                 reject: boolean;
                                 transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7251,6 +8045,2517 @@ export interface operations {
             };
         };
     };
+    OrganizationWorkController_workers_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            userId: string;
+                            name: string;
+                            available: boolean;
+                            activeTasks: number;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationWorkController_assign_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    workerId: string;
+                    note?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationWorkController_reassign_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    workerId: string;
+                    note?: string;
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationWorkController_cancel_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationWorkController_verify_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                    reason?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationWorkController_reopen_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationWorkController_close_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportFeedbackController_feedback_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    fixed: boolean;
+                    comment?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            locationAccuracyM: number | null;
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            version: number;
+                            canEdit: boolean;
+                            canWithdraw: boolean;
+                            canProvideInformation: boolean;
+                            informationRequest: {
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                            } | null;
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            completion: {
+                                description: string;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                                /** Format: date-time */
+                                resolvedAt: string;
+                            } | null;
+                            canGiveFeedback: boolean;
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                            } | null;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_memberships_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            available: boolean;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    WorkController_availability_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    available: boolean;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            available: boolean;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_tasks_v1: {
+        parameters: {
+            query?: {
+                group?: "TO_ACCEPT" | "ACTIVE" | "WAITING" | "DONE";
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            /** @enum {string} */
+                            state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                            organizationName: string;
+                            publicId: string;
+                            title: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            reportStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            locationDescription: string | null;
+                            /** Format: date-time */
+                            assignedAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+        };
+    };
+    WorkController_task_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_accept_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_decline_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_start_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_progress_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    message: string;
+                    /** @default [] */
+                    mediaIds?: string[];
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_returnTask_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    WorkController_complete_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                assignmentId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    description: string;
+                    mediaIds: string[];
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            assignment: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            };
+                            /** Format: uuid */
+                            organizationId: string;
+                            organizationName: string;
+                            report: {
+                                publicId: string;
+                                title: string;
+                                description: string;
+                                category: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                };
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                latitude: number;
+                                longitude: number;
+                                locationDescription: string | null;
+                                photos: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    thumbnailUrl: string | null;
+                                    displayUrl: string | null;
+                                }[];
+                            };
+                            actions: {
+                                accept: boolean;
+                                decline: boolean;
+                                start: boolean;
+                                progress: boolean;
+                                returnTask: boolean;
+                                complete: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
     MediaController_createIntent_v1: {
         parameters: {
             query?: never;
@@ -7264,6 +10569,11 @@ export interface operations {
                     /** @enum {string} */
                     contentType: "image/jpeg" | "image/png" | "image/webp";
                     byteSize: number;
+                    /**
+                     * @default REPORT_PHOTO
+                     * @enum {string}
+                     */
+                    purpose?: "REPORT_PHOTO" | "WORK_PHOTO";
                 };
             };
         };

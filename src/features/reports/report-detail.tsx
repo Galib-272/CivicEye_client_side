@@ -11,6 +11,7 @@ import { errorDetail, errorMessage } from '@/features/auth/server-errors';
 import {
   isOwnReport,
   useReport,
+  useGiveFeedback,
   useProvideInformation,
   usePublicUpdates,
   useReportHistory,
@@ -22,6 +23,7 @@ import {
 } from './api';
 import { LocationMap } from './location-map';
 import { PhotoUploader, type PhotoItem } from './photo-uploader';
+import { PhotoGrid } from '@/features/work/assignment-history';
 
 export function StatusBadge({ status }: { status: ReportStatus }) {
   const t = useTranslations('ReportStatus');
@@ -260,6 +262,80 @@ function InformationRequest({ report }: { report: OwnReport }) {
   );
 }
 
+/** The verified fix and the citizen's "Is it fixed?" answer. */
+function Resolution({ report }: { report: OwnReport }) {
+  const t = useTranslations('ResolvedExtra');
+  const tErrors = useTranslations('Errors');
+  const format = useFormatter();
+  const give = useGiveFeedback(report.publicId);
+  const [fixed, setFixed] = useState<boolean | null>(null);
+  const [comment, setComment] = useState('');
+  const { completion } = report;
+  if (!completion && !report.canGiveFeedback && !report.feedback) return null;
+
+  return (
+    <Section title={t('completionHeading')}>
+      {completion && (
+        <div className="space-y-2">
+          <p className="text-muted text-sm">
+            {t('resolvedOn', {
+              date: format.dateTime(new Date(completion.resolvedAt), { dateStyle: 'medium' }),
+            })}
+          </p>
+          <p className="whitespace-pre-line">{completion.description}</p>
+          <PhotoGrid
+            photos={completion.photos}
+            alt={(index) => t('afterAlt', { number: index + 1 })}
+          />
+        </div>
+      )}
+      {report.feedback ? (
+        <FormAlert tone="success">
+          {t('feedbackGiven', {
+            answer: report.feedback.fixed ? t('feedbackYes') : t('feedbackNo'),
+          })}
+        </FormAlert>
+      ) : report.canGiveFeedback ? (
+        <form
+          className="space-y-3"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (fixed === null) return;
+            give.mutate({ fixed, comment: comment.trim() || undefined });
+          }}
+        >
+          {give.isError && <FormAlert tone="error">{errorMessage(give.error, tErrors)}</FormAlert>}
+          <fieldset className="space-y-2">
+            <legend className="font-medium">{t('feedbackHeading')}</legend>
+            <p className="text-muted text-sm">{t('feedbackHint')}</p>
+            {[true, false].map((value) => (
+              <label key={String(value)} className="flex items-center gap-2">
+                <input
+                  type="radio"
+                  name="fixed"
+                  checked={fixed === value}
+                  onChange={() => setFixed(value)}
+                />
+                <span>{value ? t('feedbackYes') : t('feedbackNo')}</span>
+              </label>
+            ))}
+          </fieldset>
+          <TextAreaField
+            label={t('feedbackComment')}
+            rows={2}
+            maxLength={1000}
+            value={comment}
+            onChange={(event) => setComment(event.target.value)}
+          />
+          <Button busy={give.isPending} disabled={fixed === null}>
+            {t('feedbackSend')}
+          </Button>
+        </form>
+      ) : null}
+    </Section>
+  );
+}
+
 function OrganizationUpdates({ publicId }: { publicId: string }) {
   const t = useTranslations('ReportExtra');
   const format = useFormatter();
@@ -342,6 +418,7 @@ export function ReportDetail({ publicId }: { publicId: string }) {
         </FormAlert>
       )}
       {own && <InformationRequest report={own} />}
+      {own && <Resolution report={own} />}
 
       <Section title={t('category')}>
         <p>{locale === 'bn' ? data.category.nameBn : data.category.nameEn}</p>

@@ -59,6 +59,9 @@ const ownReport = {
   informationRequest: null,
   rejection: null,
   photos: [],
+  completion: null,
+  canGiveFeedback: false,
+  feedback: null,
 };
 
 const history = [

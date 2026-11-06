@@ -27,6 +27,7 @@ export function PhotoUploader({
   legend,
   hint,
   inputId = 'report-photos',
+  purpose = 'REPORT_PHOTO',
 }: {
   photos: PhotoItem[];
   onChange: (update: (current: PhotoItem[]) => PhotoItem[]) => void;
@@ -36,6 +37,8 @@ export function PhotoUploader({
   legend?: string;
   hint?: string;
   inputId?: string;
+  /** WORK_PHOTO for a worker's progress and completion photos. */
+  purpose?: 'REPORT_PHOTO' | 'WORK_PHOTO';
 }) {
   const t = useTranslations('ReportForm');
   const input = useRef<HTMLInputElement>(null);
@@ -91,6 +94,7 @@ export function PhotoUploader({
         (progress) =>
           update(key, progress === 100 ? { progress, state: 'processing' } : { progress }),
         controller.signal,
+        purpose,
       )
         .then((view) =>
           update(key, {

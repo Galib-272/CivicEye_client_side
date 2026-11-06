@@ -52,6 +52,21 @@ export function usePublicUpdates(publicId: string, enabled: boolean) {
   });
 }
 
+/** "Is it fixed?" from the reporting citizen, after resolution. */
+export function useGiveFeedback(publicId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (body: { fixed: boolean; comment?: string }) =>
+      callApi(() =>
+        apiClient().POST('/api/v1/reports/{publicId}/feedback', {
+          params: { path: { publicId } },
+          body,
+        }),
+      ),
+    onSuccess: (report) => queryClient.setQueryData(reportKeys.detail(publicId), report),
+  });
+}
+
 /** The citizen answers the organization's information request. */
 export function useProvideInformation(publicId: string) {
   const queryClient = useQueryClient();
@@ -263,10 +278,13 @@ export async function uploadPhoto(
   file: File,
   onProgress: (percent: number) => void,
   signal: AbortSignal,
+  purpose: 'REPORT_PHOTO' | 'WORK_PHOTO' = 'REPORT_PHOTO',
 ): Promise<MediaView> {
   const contentType = file.type as (typeof ACCEPTED_PHOTO_TYPES)[number];
   const intent = await callApi(() =>
-    apiClient().POST('/api/v1/media/upload-intent', { body: { contentType, byteSize: file.size } }),
+    apiClient().POST('/api/v1/media/upload-intent', {
+      body: { contentType, byteSize: file.size, purpose },
+    }),
   );
   await putWithProgress(intent.uploadUrl, file, contentType, onProgress);
   const params = { params: { path: { mediaId: intent.mediaId } } };

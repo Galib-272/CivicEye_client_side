@@ -14,6 +14,7 @@ import { categoryName } from '@/features/organizations/categories-panel';
 import { LocationMap } from '@/features/reports/location-map';
 import { StatusBadge } from '@/features/reports/report-detail';
 import { Link } from '@/i18n/navigation';
+import { AssignmentPanel } from './assignment-panel';
 import {
   REJECTION_REASONS,
   useAddNote,
@@ -397,7 +398,7 @@ function Timeline({ scope, publicId }: { scope: WorkspaceScope; publicId: string
   const reasonLabel = (reason: string) =>
     (REJECTION_REASONS as string[]).includes(reason) ? tReasons(reason as RejectionReason) : reason;
   const actorLabel = (actor: string) =>
-    ['citizen', 'org_reviewer', 'super_admin', 'system'].includes(actor)
+    ['citizen', 'org_reviewer', 'worker', 'super_admin', 'system'].includes(actor)
       ? t(`actor.${actor as 'citizen'}`)
       : actor;
 
@@ -578,6 +579,10 @@ function Workspace({ scope, publicId }: { scope: WorkspaceScope; publicId: strin
           onTransferred={() => setTransferred(true)}
         />
       )}
+      <AssignmentPanel
+        report={data}
+        organizationId={scope.kind === 'organization' ? scope.organizationId : undefined}
+      />
       <Notes scope={scope} publicId={publicId} />
       <Updates scope={scope} publicId={publicId} />
       <Timeline scope={scope} publicId={publicId} />

@@ -14,7 +14,18 @@ type Data<Op extends keyof operations> = operations[Op]['responses'] extends {
 
 export type QueueItem = Data<'OrganizationReportsController_queue_v1'>[number];
 export type QueueCounts = Data<'OrganizationReportsController_counts_v1'>;
-export type QueueTab = 'NEW' | 'UNDER_REVIEW' | 'NEEDS_INFORMATION' | 'ACCEPTED' | 'CLOSED';
+export type QueueTab =
+  | 'NEW'
+  | 'UNDER_REVIEW'
+  | 'NEEDS_INFORMATION'
+  | 'ACCEPTED'
+  | 'IN_WORK'
+  | 'TO_VERIFY'
+  | 'RESOLVED'
+  | 'CLOSED';
+export type Worker = Data<'OrganizationWorkController_workers_v1'>[number];
+export type Assignment = WorkspaceReport['assignments'][number];
+export type VerificationOutcome = 'APPROVED' | 'REJECTED' | 'NEEDS_MORE_EVIDENCE';
 export type WorkspaceReport = Data<'OrganizationReportsController_get_v1'>;
 export type WorkspaceHistoryEntry = Data<'OrganizationReportsController_history_v1'>[number];
 export type InternalNote = Data<'OrganizationReportsController_notes_v1'>[number];
@@ -27,6 +38,9 @@ export const QUEUE_TABS: QueueTab[] = [
   'UNDER_REVIEW',
   'NEEDS_INFORMATION',
   'ACCEPTED',
+  'IN_WORK',
+  'TO_VERIFY',
+  'RESOLVED',
   'CLOSED',
 ];
 export const REJECTION_REASONS: RejectionReason[] = [
@@ -185,7 +199,13 @@ export type ReviewAction =
   | { kind: 'request-information'; message: string }
   | { kind: 'accept'; categoryId?: string; publicMessage?: string }
   | { kind: 'reject'; reason: RejectionReason; message: string }
-  | { kind: 'transfer'; toOrganizationId: string | null; reason: string };
+  | { kind: 'transfer'; toOrganizationId: string | null; reason: string }
+  | { kind: 'assign'; workerId: string; note?: string }
+  | { kind: 'reassign'; workerId: string; reason: string; note?: string }
+  | { kind: 'cancel-assignment'; reason: string }
+  | { kind: 'verify'; outcome: VerificationOutcome; reason?: string }
+  | { kind: 'reopen'; reason: string }
+  | { kind: 'close' };
 
 /**
  * One mutation for every review decision. Each sends the version the reviewer is looking at
@@ -231,9 +251,64 @@ export function useReviewAction(organizationId: string, publicId: string) {
             }),
           );
           return null;
+        case 'assign':
+          return callApi(() =>
+            apiClient().POST('/api/v1/organizations/{organizationId}/reports/{publicId}/assign', {
+              ...params,
+              body: { workerId: action.workerId, note: action.note },
+            }),
+          );
+        case 'reassign':
+          return callApi(() =>
+            apiClient().POST('/api/v1/organizations/{organizationId}/reports/{publicId}/reassign', {
+              ...params,
+              body: { workerId: action.workerId, reason: action.reason, note: action.note },
+            }),
+          );
+        case 'cancel-assignment':
+          return callApi(() =>
+            apiClient().POST(
+              '/api/v1/organizations/{organizationId}/reports/{publicId}/cancel-assignment',
+              { ...params, body: { reason: action.reason } },
+            ),
+          );
+        case 'verify':
+          return callApi(() =>
+            apiClient().POST('/api/v1/organizations/{organizationId}/reports/{publicId}/verify', {
+              ...params,
+              body: { outcome: action.outcome, reason: action.reason },
+            }),
+          );
+        case 'reopen':
+          return callApi(() =>
+            apiClient().POST('/api/v1/organizations/{organizationId}/reports/{publicId}/reopen', {
+              ...params,
+              body: { reason: action.reason },
+            }),
+          );
+        case 'close':
+          return callApi(() =>
+            apiClient().POST(
+              '/api/v1/organizations/{organizationId}/reports/{publicId}/close',
+              params,
+            ),
+          );
       }
     },
     onSettled: () => queryClient.invalidateQueries({ queryKey: reviewKeys.all }),
+  });
+}
+
+export function useWorkers(organizationId: string, enabled: boolean) {
+  return useQuery({
+    queryKey: ['review', organizationId, 'workers'],
+    enabled,
+    queryFn: () =>
+      callApi(() =>
+        apiClient().GET('/api/v1/organizations/{organizationId}/workers', {
+          params: { path: { organizationId } },
+        }),
+      ),
   });
 }
 
