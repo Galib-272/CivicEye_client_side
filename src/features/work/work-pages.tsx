@@ -38,6 +38,8 @@ function Availability() {
   const t = useTranslations('Work');
   const memberships = useWorkMemberships();
   const update = useSetAvailability();
+  // The box flips as soon as it is clicked; it returns to the saved value if saving fails.
+  const [pending, setPending] = useState<Record<string, boolean>>({});
   if (!memberships.data) return null;
   if (memberships.data.length === 0) return <FormAlert tone="info">{t('notWorker')}</FormAlert>;
   return (
@@ -49,14 +51,19 @@ function Availability() {
             <label className="flex items-center gap-2">
               <input
                 type="checkbox"
-                checked={membership.available}
+                checked={pending[membership.organizationId] ?? membership.available}
                 disabled={update.isPending}
-                onChange={(event) =>
-                  update.mutate({
-                    organizationId: membership.organizationId,
-                    available: event.target.checked,
-                  })
-                }
+                onChange={(event) => {
+                  const { organizationId } = membership;
+                  const available = event.target.checked;
+                  setPending((current) => ({ ...current, [organizationId]: available }));
+                  update.mutate(
+                    { organizationId, available },
+                    {
+                      onSettled: () => setPending(({ [organizationId]: _done, ...rest }) => rest),
+                    },
+                  );
+                }}
               />
               <span>{t('availableAt', { organization: membership.organizationName })}</span>
             </label>

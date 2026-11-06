@@ -306,7 +306,9 @@ test('a reviewer assigns an available worker', async ({ page }) => {
   await page.goto(`/en/organizations/${ORG_ID}/reports/${PUBLIC_ID}`);
   await page.getByText('Assign a worker').click();
   await expect(page.getByRole('option', { name: 'Rafiq Worker · unavailable' })).toBeDisabled();
-  await page.getByLabel('Worker').selectOption({ label: 'Jamal Worker · 2 open tasks' });
+  await page
+    .getByLabel('Worker', { exact: true })
+    .selectOption({ label: 'Jamal Worker · 2 open tasks' });
   await page.getByLabel('Instructions for the worker (optional)').fill('Bring traffic cones.');
   await page.getByRole('button', { name: 'Assign', exact: true }).click();
   await expect(page.getByText('Jamal Worker · Waiting to be accepted')).toBeVisible();
