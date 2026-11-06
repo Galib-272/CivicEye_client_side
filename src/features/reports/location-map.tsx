@@ -10,6 +10,8 @@ import { useEffect, useRef, useState } from 'react';
  */
 export const MAP_STYLE_URL = 'https://tiles.openfreemap.org/styles/liberty';
 /** Dhaka (approved launch area). */
+/** Served from public/ (copied by scripts/copy-map-worker.mjs); see that script for why. */
+const WORKER_URL = '/vendor/maplibre-gl-worker.mjs';
 export const DEFAULT_CENTER: [number, number] = [90.4125, 23.8103];
 
 export interface MapPoint {
@@ -82,6 +84,7 @@ export function LocationMap({
       const start = initial.current;
       let instance: MapLibreMap;
       try {
+        maplibregl.setWorkerUrl(WORKER_URL);
         instance = new maplibregl.Map({
           container: container.current,
           style: MAP_STYLE_URL,

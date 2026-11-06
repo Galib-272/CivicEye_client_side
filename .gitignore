@@ -7,6 +7,9 @@ out/
 next-env.d.ts
 *.tsbuildinfo
 
+# Copied from node_modules before dev/build (scripts/copy-map-worker.mjs)
+public/vendor/
+
 # Testing
 coverage/
 test-results/

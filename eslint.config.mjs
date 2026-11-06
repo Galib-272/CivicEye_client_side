@@ -21,6 +21,8 @@ const eslintConfig = defineConfig([
     'out/**',
     'build/**',
     'next-env.d.ts',
+    // Third-party file copied from node_modules before dev/build.
+    'public/vendor/**',
   ]),
 ]);
 
