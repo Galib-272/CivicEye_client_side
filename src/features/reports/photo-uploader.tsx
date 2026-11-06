@@ -23,10 +23,19 @@ export function PhotoUploader({
   photos,
   onChange,
   error,
+  max = MAX_PHOTOS,
+  legend,
+  hint,
+  inputId = 'report-photos',
 }: {
   photos: PhotoItem[];
   onChange: (update: (current: PhotoItem[]) => PhotoItem[]) => void;
   error?: string;
+  /** How many photos may be added here (fewer when the report already has some). */
+  max?: number;
+  legend?: string;
+  hint?: string;
+  inputId?: string;
 }) {
   const t = useTranslations('ReportForm');
   const input = useRef<HTMLInputElement>(null);
@@ -47,7 +56,7 @@ export function PhotoUploader({
   const addFiles = (files: FileList | null) => {
     if (!files) return;
     const problems: string[] = [];
-    const room = MAX_PHOTOS - photos.length;
+    const room = max - photos.length;
     const accepted: File[] = [];
     for (const file of Array.from(files)) {
       if (!ACCEPTED_PHOTO_TYPES.includes(file.type as (typeof ACCEPTED_PHOTO_TYPES)[number])) {
@@ -124,9 +133,9 @@ export function PhotoUploader({
 
   return (
     <fieldset className="space-y-3">
-      <legend className="font-medium">{t('photos')}</legend>
-      <p id="photos-hint" className="text-muted text-sm">
-        {t('photosHint')}
+      <legend className="font-medium">{legend ?? t('photos')}</legend>
+      <p id={`${inputId}-hint`} className="text-muted text-sm">
+        {hint ?? t('photosHint')}
       </p>
       {photos.length > 0 && (
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -156,10 +165,10 @@ export function PhotoUploader({
           ))}
         </ul>
       )}
-      {photos.length < MAX_PHOTOS && (
+      {photos.length < max && (
         <div>
           <label
-            htmlFor="report-photos"
+            htmlFor={inputId}
             className="border-border focus-within:outline-accent inline-block cursor-pointer rounded-md border px-4 py-2 font-medium focus-within:outline-2"
           >
             {t('addPhotos')}
@@ -167,11 +176,11 @@ export function PhotoUploader({
           {/* Asking for JPEG/PNG/WebP makes iPhones convert HEIC photos to JPEG. */}
           <input
             ref={input}
-            id="report-photos"
+            id={inputId}
             type="file"
             accept={ACCEPTED_PHOTO_TYPES.join(',')}
             multiple
-            aria-describedby="photos-hint"
+            aria-describedby={`${inputId}-hint`}
             className="sr-only"
             onChange={(event) => addFiles(event.target.files)}
           />

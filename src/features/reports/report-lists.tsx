@@ -4,7 +4,7 @@ import { useFormatter, useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { FormAlert } from '@/components/ui/form-alert';
-import { Section } from '@/components/ui/section';
+import { Badge, Section } from '@/components/ui/section';
 import { SelectField, TextAreaField } from '@/components/ui/select-field';
 import { RequireAuth } from '@/features/auth/require-auth';
 import { RequireSuperAdmin } from '@/features/auth/require-super-admin';
@@ -51,6 +51,7 @@ function ReportCard({
 }) {
   const t = useTranslations('PublicReports');
   const tReport = useTranslations('Report');
+  const tExtra = useTranslations('MyReportsExtra');
   const locale = useLocale();
   const format = useFormatter();
   return (
@@ -62,7 +63,12 @@ function ReportCard({
         >
           {report.title}
         </Link>
-        <StatusBadge status={report.status} />
+        <span className="flex flex-wrap gap-2">
+          {!showPhotos && report.status === 'NEEDS_INFORMATION' && (
+            <Badge tone="warn">{tExtra('needsAnswer')}</Badge>
+          )}
+          <StatusBadge status={report.status} />
+        </span>
       </div>
       <p className="text-muted text-sm">
         {locale === 'bn' ? report.category.nameBn : report.category.nameEn} ·{' '}
@@ -80,6 +86,7 @@ function MyReports() {
   const t = useTranslations('MyReports');
   const tStatus = useTranslations('ReportStatus');
   const tCommon = useTranslations('Common');
+  const tExtra = useTranslations('MyReportsExtra');
   const [status, setStatus] = useState<ReportStatus | ''>('');
   const summary = useMySummary();
   const reports = useMyReports(status || undefined);
@@ -95,6 +102,11 @@ function MyReports() {
           {t('newReport')}
         </Link>
       </div>
+      {(summary.data?.byStatus['NEEDS_INFORMATION'] ?? 0) > 0 && (
+        <FormAlert tone="info">
+          {tExtra('needsAnswerCount', { count: summary.data?.byStatus['NEEDS_INFORMATION'] ?? 0 })}
+        </FormAlert>
+      )}
       {summary.data && (
         <Section title={t('summary', { total: summary.data.total })}>
           <ul className="flex flex-wrap gap-3">
@@ -245,6 +257,7 @@ function TriageRow({
   organizations: Array<{ id: string; name: string }>;
 }) {
   const t = useTranslations('Triage');
+  const tTriageExtra = useTranslations('TriageExtra');
   const tErrors = useTranslations('Errors');
   const locale = useLocale();
   const route = useRouteReport();
@@ -255,7 +268,7 @@ function TriageRow({
     <li className="border-border space-y-3 rounded-md border p-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Link
-          href={`/reports/${item.publicId}`}
+          href={`/admin/reports/${item.publicId}`}
           className="text-accent font-medium underline underline-offset-4"
         >
           {item.publicId} · {item.title}
@@ -271,6 +284,7 @@ function TriageRow({
             })
           : t('noCandidates')}
       </p>
+      {item.note && <p className="text-sm">{tTriageExtra('note', { note: item.note })}</p>}
       {item.locationDescription && <p className="text-muted text-sm">{item.locationDescription}</p>}
       {route.isError && <FormAlert tone="error">{errorMessage(route.error, tErrors)}</FormAlert>}
       <div className="grid gap-3 sm:grid-cols-2">

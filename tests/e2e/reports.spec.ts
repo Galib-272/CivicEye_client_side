@@ -55,6 +55,9 @@ const ownReport = {
   version: 3,
   canEdit: true,
   canWithdraw: true,
+  canProvideInformation: false,
+  informationRequest: null,
+  rejection: null,
   photos: [],
 };
 
@@ -108,6 +111,7 @@ test.describe('reports', () => {
       ...signedOut,
       [`GET /reports/${PUBLIC_ID}`]: () => ok(publicReport),
       [`GET /reports/${PUBLIC_ID}/history`]: () => ok(history),
+      [`GET /reports/${PUBLIC_ID}/updates`]: () => ok([]),
     });
     await page.goto(`/en/reports/${PUBLIC_ID}`);
     await expect(page.getByRole('heading', { level: 1, name: publicReport.title })).toBeVisible();
@@ -188,6 +192,7 @@ test.describe('reports', () => {
       },
       [`GET /reports/${PUBLIC_ID}`]: () => ok(ownReport),
       [`GET /reports/${PUBLIC_ID}/history`]: () => ok(history),
+      [`GET /reports/${PUBLIC_ID}/updates`]: () => ok([]),
     });
 
     await page.goto('/en/reports/new');
@@ -235,6 +240,7 @@ test.describe('reports', () => {
       ...signedIn(),
       [`GET /reports/${PUBLIC_ID}`]: () => ok(current),
       [`GET /reports/${PUBLIC_ID}/history`]: () => ok(history),
+      [`GET /reports/${PUBLIC_ID}/updates`]: () => ok([]),
       [`PATCH /reports/${PUBLIC_ID}`]: (route) => {
         ifMatch = route.request().headers()['if-match'];
         current = { ...ownReport, title: 'Very deep pothole near the bus stop', version: 4 };
@@ -273,6 +279,7 @@ test.describe('reports', () => {
         status: 'SUBMITTED',
         routing: 'UNROUTED',
         candidates: [],
+        note: null,
         latitude: 23.79412,
         longitude: 90.40731,
         locationDescription: null,

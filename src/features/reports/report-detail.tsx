@@ -11,13 +11,17 @@ import { errorDetail, errorMessage } from '@/features/auth/server-errors';
 import {
   isOwnReport,
   useReport,
+  useProvideInformation,
+  usePublicUpdates,
   useReportHistory,
+  MAX_PHOTOS,
   useUpdateReport,
   useWithdrawReport,
   type OwnReport,
   type ReportStatus,
 } from './api';
 import { LocationMap } from './location-map';
+import { PhotoUploader, type PhotoItem } from './photo-uploader';
 
 export function StatusBadge({ status }: { status: ReportStatus }) {
   const t = useTranslations('ReportStatus');
@@ -191,6 +195,100 @@ function OwnerActions({ report }: { report: OwnReport }) {
   );
 }
 
+/** The organization's open question, with the citizen's answer form (text and optional photos). */
+function InformationRequest({ report }: { report: OwnReport }) {
+  const t = useTranslations('ReportExtra');
+  const tErrors = useTranslations('Errors');
+  const format = useFormatter();
+  const provide = useProvideInformation(report.publicId);
+  const [message, setMessage] = useState('');
+  const [photos, setPhotos] = useState<PhotoItem[]>([]);
+  const request = report.informationRequest;
+  if (provide.isSuccess) return <FormAlert tone="success">{t('answerSent')}</FormAlert>;
+  if (!request || !report.canProvideInformation) return null;
+
+  const ready = photos.filter((photo) => photo.state === 'ready');
+  const pending = photos.some(
+    (photo) => photo.state === 'uploading' || photo.state === 'processing',
+  );
+  const onSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    provide.mutate({
+      message: message.trim(),
+      mediaIds: ready.map((photo) => photo.mediaId).filter((id): id is string => !!id),
+    });
+  };
+
+  return (
+    <Section title={t('informationHeading')}>
+      <div className="border-accent rounded-md border-s-4 ps-3">
+        <p className="text-muted text-sm">
+          {t('informationIntro')} ·{' '}
+          {format.dateTime(new Date(request.requestedAt), { dateStyle: 'medium' })}
+        </p>
+        <p className="whitespace-pre-line">{request.message}</p>
+      </div>
+      <form onSubmit={onSubmit} className="space-y-4">
+        {provide.isError && (
+          <FormAlert tone="error">
+            <p>{errorMessage(provide.error, tErrors)}</p>
+            {errorDetail(provide.error) && <p className="text-sm">{errorDetail(provide.error)}</p>}
+          </FormAlert>
+        )}
+        <TextAreaField
+          label={t('answerLabel')}
+          rows={4}
+          minLength={10}
+          maxLength={2000}
+          required
+          value={message}
+          onChange={(event) => setMessage(event.target.value)}
+        />
+        <PhotoUploader
+          photos={photos}
+          onChange={setPhotos}
+          max={Math.max(0, MAX_PHOTOS - report.photos.length)}
+          legend={t('answerPhotos')}
+          hint={t('answerPhotosHint')}
+          inputId="answer-photos"
+        />
+        <Button busy={provide.isPending} disabled={pending || message.trim().length < 10}>
+          {t('sendAnswer')}
+        </Button>
+      </form>
+    </Section>
+  );
+}
+
+function OrganizationUpdates({ publicId }: { publicId: string }) {
+  const t = useTranslations('ReportExtra');
+  const format = useFormatter();
+  const updates = usePublicUpdates(publicId, true);
+  if (!updates.data) return null;
+  return (
+    <Section title={t('updatesHeading')}>
+      {updates.data.length === 0 ? (
+        <p className="text-muted">{t('noUpdates')}</p>
+      ) : (
+        <ul className="space-y-3">
+          {updates.data.map((update) => (
+            <li key={update.id} className="border-border border-s-2 ps-3">
+              <p className="whitespace-pre-line">{update.body}</p>
+              <p className="text-muted text-sm">
+                {update.organizationName} ·{' '}
+                {format.dateTime(new Date(update.createdAt), {
+                  dateStyle: 'medium',
+                  timeStyle: 'short',
+                })}
+              </p>
+            </li>
+          ))}
+        </ul>
+      )}
+    </Section>
+  );
+}
+
 export function ReportDetail({ publicId }: { publicId: string }) {
   const t = useTranslations('Report');
   const tForm = useTranslations('ReportForm');
@@ -201,6 +299,8 @@ export function ReportDetail({ publicId }: { publicId: string }) {
   const format = useFormatter();
   const report = useReport(publicId);
   const history = useReportHistory(publicId, report.isSuccess);
+  const tExtra = useTranslations('ReportExtra');
+  const tReasons = useTranslations('RejectionReason');
 
   if (report.isError) {
     return (
@@ -234,6 +334,14 @@ export function ReportDetail({ publicId }: { publicId: string }) {
         </div>
       </div>
       {own?.status === 'WITHDRAWN' && <FormAlert tone="info">{t('withdrawn')}</FormAlert>}
+      {own?.rejection && (
+        <FormAlert tone="info">
+          <p className="font-medium">{tExtra('rejectedHeading')}</p>
+          <p>{tExtra('rejectedReason', { reason: tReasons(own.rejection.reason) })}</p>
+          <p className="whitespace-pre-line">{own.rejection.message}</p>
+        </FormAlert>
+      )}
+      {own && <InformationRequest report={own} />}
 
       <Section title={t('category')}>
         <p>{locale === 'bn' ? data.category.nameBn : data.category.nameEn}</p>
@@ -281,6 +389,8 @@ export function ReportDetail({ publicId }: { publicId: string }) {
         />
         {data.locationDescription && <p>{data.locationDescription}</p>}
       </Section>
+
+      <OrganizationUpdates publicId={publicId} />
 
       <Section title={t('timeline')}>
         {!history.data ? (

@@ -968,6 +968,40 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/reports/{publicId}/updates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Organization updates on a report you may see. */
+        get: operations["ReportsController_updates_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/reports/{publicId}/additional-information": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Answer the organization’s information request (NEEDS_INFORMATION → UNDER_REVIEW), optionally with more photos. */
+        post: operations["ReportsController_provideInformation_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/reports/{publicId}/withdraw": {
         parameters: {
             query?: never;
@@ -1013,6 +1047,297 @@ export interface paths {
         put?: never;
         /** Send a triaged report to a verified organization, with a reason. */
         post: operations["AdminReportsController_route_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Any report in the workspace view. Each view is audited. */
+        get: operations["AdminReportModerationController_get_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Full status timeline with reasons. */
+        get: operations["AdminReportModerationController_history_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}/notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Internal notes of every organization that handled the report. */
+        get: operations["AdminReportModerationController_notes_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}/updates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public updates, including hidden ones. */
+        get: operations["AdminReportModerationController_updates_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/updates/{updateId}/hide": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Hide an abusive public update, with a reason. */
+        post: operations["AdminReportModerationController_hide_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Review queue, oldest first. */
+        get: operations["OrganizationReportsController_queue_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/counts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Number of reports in each queue tab. */
+        get: operations["OrganizationReportsController_counts_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** A report in the review workspace. The reporter is never shown. */
+        get: operations["OrganizationReportsController_get_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Full status timeline with reasons. */
+        get: operations["OrganizationReportsController_history_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/start-review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** SUBMITTED → UNDER_REVIEW. */
+        post: operations["OrganizationReportsController_startReview_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/request-information": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** UNDER_REVIEW → NEEDS_INFORMATION, with a message to the citizen. */
+        post: operations["OrganizationReportsController_requestInformation_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/accept": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** UNDER_REVIEW → ACCEPTED. The category must be one the organization handles. */
+        post: operations["OrganizationReportsController_accept_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/reject": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** UNDER_REVIEW → REJECTED, with a reason and a message to the citizen. */
+        post: operations["OrganizationReportsController_reject_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/transfer-targets": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Organizations that may receive this report in a transfer. */
+        get: operations["OrganizationReportsController_transferTargets_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/transfer": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Move the report to another eligible organization, or back to Super Admin triage (toOrganizationId null). Your organization loses access. */
+        post: operations["OrganizationReportsController_transfer_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/notes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Internal notes of this organization. Never shown to citizens. */
+        get: operations["OrganizationReportsController_notes_v1"];
+        put?: never;
+        /** Add an internal note. Notes cannot be edited or deleted. */
+        post: operations["OrganizationReportsController_addNote_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/updates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public updates on the report, including hidden ones. */
+        get: operations["OrganizationReportsController_updates_v1"];
+        put?: never;
+        /** Post a public update, shown to everyone who can see the report. */
+        post: operations["OrganizationReportsController_addUpdate_v1"];
         delete?: never;
         options?: never;
         head?: never;
@@ -4748,10 +5073,21 @@ export interface operations {
                             visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
                             locationAccuracyM: number | null;
                             /** @enum {string} */
-                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
                             version: number;
                             canEdit: boolean;
                             canWithdraw: boolean;
+                            canProvideInformation: boolean;
+                            informationRequest: {
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                            } | null;
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
                             photos: {
                                 /** Format: uuid */
                                 id: string;
@@ -4927,10 +5263,21 @@ export interface operations {
                             visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
                             locationAccuracyM: number | null;
                             /** @enum {string} */
-                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
                             version: number;
                             canEdit: boolean;
                             canWithdraw: boolean;
+                            canProvideInformation: boolean;
+                            informationRequest: {
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                            } | null;
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
                             photos: {
                                 /** Format: uuid */
                                 id: string;
@@ -5037,10 +5384,21 @@ export interface operations {
                             visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
                             locationAccuracyM: number | null;
                             /** @enum {string} */
-                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
                             version: number;
                             canEdit: boolean;
                             canWithdraw: boolean;
+                            canProvideInformation: boolean;
+                            informationRequest: {
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                            } | null;
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
                             photos: {
                                 /** Format: uuid */
                                 id: string;
@@ -5137,6 +5495,160 @@ export interface operations {
             };
         };
     };
+    ReportsController_updates_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            organizationName: string;
+                            body: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    ReportsController_provideInformation_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    message: string;
+                    /** @default [] */
+                    mediaIds?: string[];
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationDescription: string | null;
+                            organizationName: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            locationAccuracyM: number | null;
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            version: number;
+                            canEdit: boolean;
+                            canWithdraw: boolean;
+                            canProvideInformation: boolean;
+                            informationRequest: {
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                            } | null;
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
     ReportsController_withdraw_v1: {
         parameters: {
             query?: never;
@@ -5188,10 +5700,21 @@ export interface operations {
                             visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
                             locationAccuracyM: number | null;
                             /** @enum {string} */
-                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL";
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
                             version: number;
                             canEdit: boolean;
                             canWithdraw: boolean;
+                            canProvideInformation: boolean;
+                            informationRequest: {
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                            } | null;
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
                             photos: {
                                 /** Format: uuid */
                                 id: string;
@@ -5268,6 +5791,7 @@ export interface operations {
                                 id: string;
                                 name: string;
                             }[];
+                            note: string | null;
                             latitude: number;
                             longitude: number;
                             locationDescription: string | null;
@@ -5338,6 +5862,1386 @@ export interface operations {
                 };
             };
             422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminReportModerationController_get_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminReportModerationController_history_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {string|null} */
+                            fromStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE" | null;
+                            /** @enum {string} */
+                            toStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            actorContext: string;
+                            reason: string | null;
+                            publicMessage: string | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminReportModerationController_notes_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            body: string;
+                            authorName: string;
+                            organizationName: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminReportModerationController_updates_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            body: string;
+                            authorName: string;
+                            organizationName: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                            hidden: boolean;
+                            hiddenReason: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminReportModerationController_hide_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                updateId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            hidden: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_queue_v1: {
+        parameters: {
+            query?: {
+                tab?: "NEW" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "CLOSED";
+                categoryId?: string;
+                page?: number;
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            locationDescription: string | null;
+                            photoCount: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                        }[];
+                        meta: {
+                            page: number;
+                            limit: number;
+                            total: number;
+                            totalPages: number;
+                            requestId: string;
+                        };
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_counts_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            [key: string]: number;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_get_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_history_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {string|null} */
+                            fromStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE" | null;
+                            /** @enum {string} */
+                            toStatus: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            actorContext: string;
+                            reason: string | null;
+                            publicMessage: string | null;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_startReview_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_requestInformation_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    message: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_accept_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    categoryId?: string;
+                    publicMessage?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_reject_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                    message: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_transferTargets_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_transfer_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** Format: uuid */
+                    toOrganizationId: string | null;
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** @enum {boolean} */
+                            transferred: true;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_notes_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            body: string;
+                            authorName: string;
+                            organizationName: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_addNote_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    body: string;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            body: string;
+                            authorName: string;
+                            organizationName: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_updates_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            body: string;
+                            authorName: string;
+                            organizationName: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                            hidden: boolean;
+                            hiddenReason: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_addUpdate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    body: string;
+                };
+            };
+        };
+        responses: {
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            body: string;
+                            authorName: string;
+                            organizationName: string;
+                            /** Format: date-time */
+                            createdAt: string;
+                            hidden: boolean;
+                            hiddenReason: string | null;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };

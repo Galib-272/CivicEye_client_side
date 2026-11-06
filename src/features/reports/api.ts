@@ -27,6 +27,8 @@ export type ReportStatus = PublicReport['status'];
 export type CreateReportInput = Body<'ReportsController_create_v1'>;
 export type UpdateReportInput = Body<'ReportsController_update_v1'>;
 export type MediaView = Data<'MediaController_view_v1'>;
+export type PublicUpdate = Data<'ReportsController_updates_v1'>[number];
+export type ProvideInformationInput = Body<'ReportsController_provideInformation_v1'>;
 
 export function isOwnReport(report: ReportView): report is OwnReport {
   return 'version' in report;
@@ -35,7 +37,39 @@ export function isOwnReport(report: ReportView): report is OwnReport {
 export const reportKeys = {
   detail: (publicId: string) => ['reports', publicId] as const,
   history: (publicId: string) => ['reports', publicId, 'history'] as const,
+  updates: (publicId: string) => ['reports', publicId, 'updates'] as const,
 };
+
+/** Organization updates on a report the viewer may see. */
+export function usePublicUpdates(publicId: string, enabled: boolean) {
+  return useQuery({
+    queryKey: reportKeys.updates(publicId),
+    enabled,
+    queryFn: () =>
+      callApi(() =>
+        apiClient().GET('/api/v1/reports/{publicId}/updates', { params: { path: { publicId } } }),
+      ),
+  });
+}
+
+/** The citizen answers the organization's information request. */
+export function useProvideInformation(publicId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (body: ProvideInformationInput) =>
+      callApi(() =>
+        apiClient().POST('/api/v1/reports/{publicId}/additional-information', {
+          params: { path: { publicId } },
+          body,
+        }),
+      ),
+    onSuccess: (report) => {
+      queryClient.setQueryData(reportKeys.detail(publicId), report);
+      void queryClient.invalidateQueries({ queryKey: reportKeys.history(publicId) });
+      void queryClient.invalidateQueries({ queryKey: ['reports', 'mine'] });
+    },
+  });
+}
 
 export function useReport(publicId: string) {
   return useQuery({

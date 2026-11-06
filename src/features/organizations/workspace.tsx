@@ -19,6 +19,7 @@ function Workspace({ organizationId }: { organizationId: string }) {
   const tTypes = useTranslations('OrganizationTypes');
   const tCommon = useTranslations('Common');
   const tErrors = useTranslations('Errors');
+  const tReview = useTranslations('Review');
   const overview = useOverview(organizationId);
 
   // Non-members get NOT_FOUND from the API, so they see the same message as a missing page.
@@ -59,6 +60,14 @@ function Workspace({ organizationId }: { organizationId: string }) {
           <p className="text-muted text-sm">
             {t('yourRole', { role: tRoles(organization.myRole) })}
           </p>
+        )}
+        {(organization.myRole === 'ORG_ADMIN' || organization.myRole === 'ORG_REVIEWER') && (
+          <Link
+            href={`/organizations/${organization.id}/reports`}
+            className="bg-accent text-background focus-ring inline-block rounded-md px-4 py-2 font-medium"
+          >
+            {tReview('openQueue')}
+          </Link>
         )}
       </Section>
       {isAdmin && <ProfileForm scope="member" organization={organization} />}
