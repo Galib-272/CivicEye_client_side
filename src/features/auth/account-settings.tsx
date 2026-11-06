@@ -20,6 +20,7 @@ import {
 } from './api';
 import { MyOrganizations } from '@/features/organizations/workspace';
 import { applyFieldErrors, errorMessage } from './server-errors';
+import { EmailPreferences } from '@/features/notifications/notifications-page';
 
 function Section({ title, children }: { title: string; children: ReactNode }) {
   const headingId = useId();
@@ -294,6 +295,7 @@ export function AccountSettings({ auth }: { auth: AuthState }) {
       <ProfileSection auth={auth} />
       <MyOrganizations />
       <PasswordSection />
+      <EmailPreferences />
       <TwoFactorSection />
       <SessionsSection />
     </div>

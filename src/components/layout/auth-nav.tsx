@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useLogout, useAuthState } from '@/features/auth/api';
+import { NotificationBell } from '@/features/notifications/notification-bell';
 import { useWorkMemberships } from '@/features/work/api';
 import { Link, useRouter } from '@/i18n/navigation';
 
@@ -61,6 +62,11 @@ export function AuthNav() {
                   </Link>
                 </li>
               </>
+            )}
+            {(auth.mfa === 'none' || auth.mfa === 'verified') && (
+              <li>
+                <NotificationBell className={linkStyle} />
+              </li>
             )}
             <li>
               <Link href="/account" className={linkStyle}>
