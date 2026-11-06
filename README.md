@@ -78,6 +78,7 @@ types do not match the committed spec.
 | `/organizations/[id]/reports`                 | Review queue for Org Admins and Reviewers, by status tab                                                                                      |
 | `/organizations/[id]/reports/[reportId]`      | Review workspace: decisions, information requests, transfer, internal notes, public updates                                                   |
 | `/admin/reports/[reportId]`                   | Super Admin read-only view of any report (audited), with moderation of public updates                                                         |
+| `/work`, `/work/[taskId]`                     | Worker tasks and availability; accept, start, progress, return and submit completed work                                                      |
 
 All paths are prefixed with the language (`/en/…`, `/bn/…`). Email links carry their token in
 the URL fragment; pages read it, then remove it from the address bar and history.
