@@ -7,6 +7,8 @@ interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id
   label: string;
   error?: string;
   hint?: string;
+  /** Keeps the label for screen readers only, where the context already shows it. */
+  hideLabel?: boolean;
 }
 
 /**
@@ -14,7 +16,7 @@ interface TextFieldProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'id
  * get a show/hide toggle.
  */
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function TextField(
-  { label, error, hint, type = 'text', className, ...input },
+  { label, error, hint, hideLabel, type = 'text', className, ...input },
   ref,
 ) {
   const t = useTranslations('Common');
@@ -27,7 +29,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(function T
 
   return (
     <div className={`space-y-1 ${className ?? ''}`}>
-      <label htmlFor={id} className="block font-medium">
+      <label htmlFor={id} className={hideLabel ? 'sr-only' : 'block font-medium'}>
         {label}
       </label>
       {hint && (
