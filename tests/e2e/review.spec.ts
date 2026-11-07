@@ -74,6 +74,7 @@ const workspaceReport = (overrides: Record<string, unknown> = {}) => ({
     verify: false,
     reopen: false,
     close: false,
+    markDuplicate: false,
   },
   ...overrides,
 });
@@ -169,6 +170,7 @@ test.describe('organization review', () => {
             verify: false,
             reopen: false,
             close: false,
+            markDuplicate: false,
           },
         });
         return ok(current);
@@ -199,6 +201,7 @@ test.describe('organization review', () => {
             verify: false,
             reopen: false,
             close: false,
+            markDuplicate: false,
           },
         });
         return ok(current);
@@ -298,6 +301,7 @@ test.describe('citizen side of review', () => {
     photos: [],
     completion: null,
     canGiveFeedback: false,
+    duplicateOf: null,
     feedback: null,
   };
 
@@ -393,6 +397,7 @@ test('a Super Admin can view any report and hide an update', async ({ page }) =>
             verify: false,
             reopen: false,
             close: false,
+            markDuplicate: false,
           },
         }),
       ),

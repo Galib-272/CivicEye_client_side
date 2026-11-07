@@ -238,6 +238,7 @@ const workspace = (
     verify: false,
     reopen: false,
     close: false,
+    markDuplicate: false,
     ...actions,
   },
   ...overrides,
@@ -394,6 +395,7 @@ test('the citizen sees the fix and says whether it is fixed', async ({ page }) =
       resolvedAt: '2026-11-06T10:00:00.000Z',
     },
     canGiveFeedback: true,
+    duplicateOf: null,
     feedback: null as { fixed: boolean; comment: string | null } | null,
   };
   let current = resolved;
@@ -408,6 +410,7 @@ test('the citizen sees the fix and says whether it is fixed', async ({ page }) =
       current = {
         ...resolved,
         canGiveFeedback: false,
+        duplicateOf: null,
         feedback: { fixed: false, comment: 'Water still pools.' },
       };
       return ok(current);

@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale, useTranslations } from 'next-intl';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -105,6 +106,50 @@ function CreateCategoryForm() {
   );
 }
 
+/** Duplicate search distance for one category; empty means "use the parent's, then 50 m". */
+function RadiusEditor({
+  categoryId,
+  name,
+  value,
+}: {
+  categoryId: string;
+  name: string;
+  value: number | null;
+}) {
+  const t = useTranslations('AdminCategories');
+  const update = useUpdateCategory();
+  const [draft, setDraft] = useState(value === null ? '' : String(value));
+  const parsed = draft.trim() === '' ? null : Number(draft);
+  const valid = parsed === null || (Number.isInteger(parsed) && parsed >= 10 && parsed <= 1000);
+  return (
+    <form
+      className="flex items-end gap-2"
+      onSubmit={(event) => {
+        event.preventDefault();
+        if (valid) update.mutate({ categoryId, duplicateRadiusM: parsed });
+      }}
+    >
+      <TextField
+        label={t('radius', { name })}
+        hideLabel
+        placeholder={t('radiusInherited')}
+        type="number"
+        inputMode="numeric"
+        min={10}
+        max={1000}
+        className="w-28"
+        value={draft}
+        error={valid ? undefined : t('radiusRange')}
+        onChange={(event) => setDraft(event.target.value)}
+      />
+      <span className="text-muted pb-2 text-sm">m</span>
+      <Button type="submit" variant="secondary" busy={update.isPending} disabled={!valid}>
+        {update.isSuccess ? t('radiusSaved') : t('radiusSave')}
+      </Button>
+    </form>
+  );
+}
+
 function CategoryList() {
   const t = useTranslations('AdminCategories');
   const tCommon = useTranslations('Common');
@@ -131,7 +176,12 @@ function CategoryList() {
                 </p>
                 <p className="text-muted font-mono text-sm">{category.slug}</p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center gap-2">
+                <RadiusEditor
+                  categoryId={category.id}
+                  name={category.nameEn}
+                  value={category.duplicateRadiusM}
+                />
                 <Badge tone={category.isActive ? 'good' : 'neutral'}>
                   {category.isActive ? t('active') : t('inactive')}
                 </Badge>

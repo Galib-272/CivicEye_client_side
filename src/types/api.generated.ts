@@ -1308,6 +1308,74 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/duplicates": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Possible duplicates: nearby reports of the same category family, your organization only. */
+        get: operations["OrganizationReportsController_duplicates_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/nearby": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Your organization’s reports within a distance (50–1000 m). */
+        get: operations["OrganizationReportsController_nearby_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/mark-duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Link the report to its original (→ DUPLICATE, final). Both must be yours. */
+        post: operations["OrganizationReportsController_markDuplicate_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/dismiss-duplicate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Record that a suggested report is a different problem. */
+        post: operations["OrganizationReportsController_dismissDuplicate_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/organizations/{organizationId}/reports/{publicId}/notes": {
         parameters: {
             query?: never;
@@ -1644,6 +1712,57 @@ export interface paths {
         put?: never;
         /** Submit completion evidence (description and 1–5 after photos) for verification. */
         post: operations["WorkController_complete_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/map/reports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public reports inside a map box (at most 2,000; zoom in for more). */
+        get: operations["MapController_reports_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/map/organizations": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Areas covered by verified organizations (simplified outlines). */
+        get: operations["MapController_organizations_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/map/nearby": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Public reports of the same category family near a point, to check before reporting again. */
+        get: operations["MapController_nearby_v1"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -3002,6 +3121,7 @@ export interface operations {
                             descriptionBn: string | null;
                             isActive: boolean;
                             displayOrder: number;
+                            duplicateRadiusM: number | null;
                         }[];
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -3038,6 +3158,7 @@ export interface operations {
                             descriptionBn: string | null;
                             isActive: boolean;
                             displayOrder: number;
+                            duplicateRadiusM: number | null;
                         }[];
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -3063,6 +3184,7 @@ export interface operations {
                     descriptionEn?: string | null;
                     descriptionBn?: string | null;
                     displayOrder?: number;
+                    duplicateRadiusM?: number | null;
                 };
             };
         };
@@ -3087,6 +3209,7 @@ export interface operations {
                             descriptionBn: string | null;
                             isActive: boolean;
                             displayOrder: number;
+                            duplicateRadiusM: number | null;
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -3129,6 +3252,7 @@ export interface operations {
                     descriptionEn?: string | null;
                     descriptionBn?: string | null;
                     displayOrder?: number;
+                    duplicateRadiusM?: number | null;
                     isActive?: boolean;
                 };
             };
@@ -3154,6 +3278,7 @@ export interface operations {
                             descriptionBn: string | null;
                             isActive: boolean;
                             displayOrder: number;
+                            duplicateRadiusM: number | null;
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
                     };
@@ -5566,6 +5691,9 @@ export interface operations {
                                 resolvedAt: string;
                             } | null;
                             canGiveFeedback: boolean;
+                            duplicateOf: {
+                                publicId: string | null;
+                            } | null;
                             feedback: {
                                 fixed: boolean;
                                 comment: string | null;
@@ -5772,6 +5900,9 @@ export interface operations {
                                 resolvedAt: string;
                             } | null;
                             canGiveFeedback: boolean;
+                            duplicateOf: {
+                                publicId: string | null;
+                            } | null;
                             feedback: {
                                 fixed: boolean;
                                 comment: string | null;
@@ -5909,6 +6040,9 @@ export interface operations {
                                 resolvedAt: string;
                             } | null;
                             canGiveFeedback: boolean;
+                            duplicateOf: {
+                                publicId: string | null;
+                            } | null;
                             feedback: {
                                 fixed: boolean;
                                 comment: string | null;
@@ -6130,6 +6264,9 @@ export interface operations {
                                 resolvedAt: string;
                             } | null;
                             canGiveFeedback: boolean;
+                            duplicateOf: {
+                                publicId: string | null;
+                            } | null;
                             feedback: {
                                 fixed: boolean;
                                 comment: string | null;
@@ -6257,6 +6394,9 @@ export interface operations {
                                 resolvedAt: string;
                             } | null;
                             canGiveFeedback: boolean;
+                            duplicateOf: {
+                                publicId: string | null;
+                            } | null;
                             feedback: {
                                 fixed: boolean;
                                 comment: string | null;
@@ -6557,6 +6697,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7008,6 +7149,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7219,6 +7361,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7415,6 +7558,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7621,6 +7765,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7827,6 +7972,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -7986,6 +8132,405 @@ export interface operations {
                 };
             };
             428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_duplicates_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            distanceM: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_nearby_v1: {
+        parameters: {
+            query?: {
+                radius?: number;
+            };
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            distanceM: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_markDuplicate_v1: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description The report version the reviewer is looking at */
+                "If-Match": string;
+            };
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    canonicalPublicId: string;
+                    reason: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            description: string;
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            latitude: number;
+                            longitude: number;
+                            locationAccuracyM: number | null;
+                            locationDescription: string | null;
+                            /** @enum {string} */
+                            visibility: "PUBLIC" | "PRIVATE" | "ORGANIZATION_ONLY" | "RESTRICTED";
+                            /** @enum {string} */
+                            routing: "ROUTED" | "UNROUTED" | "AMBIGUOUS" | "MANUAL" | "TRANSFERRED";
+                            /** Format: uuid */
+                            organizationId: string | null;
+                            organizationName: string | null;
+                            version: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            /** Format: date-time */
+                            updatedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                            informationRequests: {
+                                /** Format: uuid */
+                                id: string;
+                                message: string;
+                                /** Format: date-time */
+                                requestedAt: string;
+                                response: {
+                                    message: string;
+                                    photoCount: number;
+                                    /** Format: date-time */
+                                    respondedAt: string;
+                                } | null;
+                            }[];
+                            rejection: {
+                                /** @enum {string} */
+                                reason: "NOT_A_CIVIC_ISSUE" | "INSUFFICIENT_INFORMATION" | "ALREADY_FIXED" | "INAPPROPRIATE_CONTENT" | "NO_RESPONSE" | "OTHER";
+                                message: string;
+                            } | null;
+                            assignments: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                workerId: string;
+                                workerName: string;
+                                /** @enum {string} */
+                                state: "PENDING" | "ACCEPTED" | "IN_PROGRESS" | "COMPLETED" | "VERIFIED" | "DECLINED" | "RETURNED" | "CANCELLED";
+                                note: string | null;
+                                /** Format: date-time */
+                                assignedAt: string;
+                                /** Format: date-time */
+                                acceptedAt: string | null;
+                                /** Format: date-time */
+                                startedAt: string | null;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                /** Format: date-time */
+                                endedAt: string | null;
+                                endReason: string | null;
+                                events: {
+                                    /** @enum {string} */
+                                    kind: "ASSIGNED" | "ACCEPTED" | "DECLINED" | "STARTED" | "PROGRESS" | "COMPLETED" | "APPROVED" | "REJECTED" | "MORE_EVIDENCE_NEEDED" | "RETURNED" | "CANCELLED";
+                                    message: string | null;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    actorName: string | null;
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                }[];
+                                submissions: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    description: string;
+                                    photos: {
+                                        /** Format: uuid */
+                                        id: string;
+                                        thumbnailUrl: string | null;
+                                        displayUrl: string | null;
+                                    }[];
+                                    /** Format: date-time */
+                                    createdAt: string;
+                                    verification: {
+                                        /** @enum {string} */
+                                        outcome: "APPROVED" | "REJECTED" | "NEEDS_MORE_EVIDENCE";
+                                        reason: string | null;
+                                        verifierName: string;
+                                        /** Format: date-time */
+                                        createdAt: string;
+                                    } | null;
+                                }[];
+                            }[];
+                            feedback: {
+                                fixed: boolean;
+                                comment: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                            }[];
+                            actions: {
+                                startReview: boolean;
+                                requestInformation: boolean;
+                                accept: boolean;
+                                reject: boolean;
+                                transfer: boolean;
+                                assign: boolean;
+                                reassign: boolean;
+                                cancelAssignment: boolean;
+                                verify: boolean;
+                                reopen: boolean;
+                                close: boolean;
+                                markDuplicate: boolean;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            428: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationReportsController_dismissDuplicate_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    candidatePublicId: string;
+                    reason?: string;
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            category: {
+                                /** Format: uuid */
+                                id: string;
+                                slug: string;
+                                nameEn: string;
+                                nameBn: string;
+                            };
+                            distanceM: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                            photos: {
+                                /** Format: uuid */
+                                id: string;
+                                thumbnailUrl: string | null;
+                                displayUrl: string | null;
+                            }[];
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -8397,6 +8942,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -8604,6 +9150,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -8808,6 +9355,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -9014,6 +9562,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -9226,6 +9775,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -9424,6 +9974,7 @@ export interface operations {
                                 verify: boolean;
                                 reopen: boolean;
                                 close: boolean;
+                                markDuplicate: boolean;
                             };
                         };
                         meta: components["schemas"]["ResponseMetaDto"];
@@ -9549,6 +10100,9 @@ export interface operations {
                                 resolvedAt: string;
                             } | null;
                             canGiveFeedback: boolean;
+                            duplicateOf: {
+                                publicId: string | null;
+                            } | null;
                             feedback: {
                                 fixed: boolean;
                                 comment: string | null;
@@ -10710,6 +11264,137 @@ export interface operations {
             };
         };
     };
+    MapController_reports_v1: {
+        parameters: {
+            query: {
+                minLng: number;
+                minLat: number;
+                maxLng: number;
+                maxLat: number;
+                categoryId?: string;
+                status?: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                from?: string;
+                to?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            reports: {
+                                publicId: string;
+                                title: string;
+                                /** @enum {string} */
+                                status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                                /** Format: uuid */
+                                categoryId: string;
+                                latitude: number;
+                                longitude: number;
+                                /** Format: date-time */
+                                submittedAt: string;
+                            }[];
+                            truncated: boolean;
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    MapController_organizations_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            /** Format: uuid */
+                            id: string;
+                            name: string;
+                            geometry: {
+                                type: string;
+                                coordinates: unknown[];
+                            };
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+        };
+    };
+    MapController_nearby_v1: {
+        parameters: {
+            query: {
+                latitude: number;
+                longitude: number;
+                categoryId: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            publicId: string;
+                            title: string;
+                            /** @enum {string} */
+                            status: "SUBMITTED" | "UNDER_REVIEW" | "NEEDS_INFORMATION" | "ACCEPTED" | "REJECTED" | "ASSIGNED" | "IN_PROGRESS" | "WORK_COMPLETED" | "PENDING_VERIFICATION" | "RESOLVED" | "REOPENED" | "CLOSED" | "WITHDRAWN" | "DUPLICATE";
+                            distanceM: number;
+                            /** Format: date-time */
+                            submittedAt: string;
+                        }[];
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
     NotificationsController_list_v1: {
         parameters: {
             query?: {
@@ -10735,7 +11420,7 @@ export interface operations {
                             /** Format: uuid */
                             id: string;
                             /** @enum {string} */
-                            type: "REPORT_UNDER_REVIEW" | "INFORMATION_REQUESTED" | "REPORT_ACCEPTED" | "REPORT_REJECTED" | "REPORT_TRANSFERRED" | "REPORT_ASSIGNED" | "WORK_STARTED" | "REPORT_RESOLVED" | "REPORT_REOPENED" | "REPORT_CLOSED" | "PUBLIC_UPDATE_POSTED" | "NEW_REPORT" | "INFORMATION_PROVIDED" | "REPORT_WITHDRAWN" | "TASK_DECLINED" | "TASK_RETURNED" | "WORK_SUBMITTED" | "NOT_FIXED_FEEDBACK" | "ACCEPTANCE_OVERDUE" | "TASK_ASSIGNED" | "TASK_CANCELLED" | "MORE_EVIDENCE_NEEDED" | "WORK_APPROVED";
+                            type: "REPORT_UNDER_REVIEW" | "INFORMATION_REQUESTED" | "REPORT_ACCEPTED" | "REPORT_REJECTED" | "REPORT_TRANSFERRED" | "REPORT_ASSIGNED" | "WORK_STARTED" | "REPORT_RESOLVED" | "REPORT_REOPENED" | "REPORT_CLOSED" | "PUBLIC_UPDATE_POSTED" | "NEW_REPORT" | "INFORMATION_PROVIDED" | "REPORT_WITHDRAWN" | "TASK_DECLINED" | "TASK_RETURNED" | "WORK_SUBMITTED" | "NOT_FIXED_FEEDBACK" | "ACCEPTANCE_OVERDUE" | "TASK_ASSIGNED" | "TASK_CANCELLED" | "MORE_EVIDENCE_NEEDED" | "WORK_APPROVED" | "REPORT_DUPLICATE";
                             reportPublicId: string | null;
                             /** Format: uuid */
                             organizationId: string | null;
@@ -10977,7 +11662,7 @@ export interface operations {
                                 /** Format: uuid */
                                 notificationId: string;
                                 /** @enum {string} */
-                                type: "REPORT_UNDER_REVIEW" | "INFORMATION_REQUESTED" | "REPORT_ACCEPTED" | "REPORT_REJECTED" | "REPORT_TRANSFERRED" | "REPORT_ASSIGNED" | "WORK_STARTED" | "REPORT_RESOLVED" | "REPORT_REOPENED" | "REPORT_CLOSED" | "PUBLIC_UPDATE_POSTED" | "NEW_REPORT" | "INFORMATION_PROVIDED" | "REPORT_WITHDRAWN" | "TASK_DECLINED" | "TASK_RETURNED" | "WORK_SUBMITTED" | "NOT_FIXED_FEEDBACK" | "ACCEPTANCE_OVERDUE" | "TASK_ASSIGNED" | "TASK_CANCELLED" | "MORE_EVIDENCE_NEEDED" | "WORK_APPROVED";
+                                type: "REPORT_UNDER_REVIEW" | "INFORMATION_REQUESTED" | "REPORT_ACCEPTED" | "REPORT_REJECTED" | "REPORT_TRANSFERRED" | "REPORT_ASSIGNED" | "WORK_STARTED" | "REPORT_RESOLVED" | "REPORT_REOPENED" | "REPORT_CLOSED" | "PUBLIC_UPDATE_POSTED" | "NEW_REPORT" | "INFORMATION_PROVIDED" | "REPORT_WITHDRAWN" | "TASK_DECLINED" | "TASK_RETURNED" | "WORK_SUBMITTED" | "NOT_FIXED_FEEDBACK" | "ACCEPTANCE_OVERDUE" | "TASK_ASSIGNED" | "TASK_CANCELLED" | "MORE_EVIDENCE_NEEDED" | "WORK_APPROVED" | "REPORT_DUPLICATE";
                                 failedAttempts: number;
                                 lastError: string | null;
                                 /** Format: date-time */

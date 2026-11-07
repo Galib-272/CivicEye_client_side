@@ -49,7 +49,8 @@
     "myReports": "My reports",
     "publicReports": "Reports",
     "triage": "Reports to assign",
-    "myTasks": "My tasks"
+    "myTasks": "My tasks",
+    "map": "Map"
   },
   "Common": {
     "loading": "Loading…",
@@ -326,7 +327,12 @@
     "inactive": "Inactive",
     "deactivate": "Deactivate",
     "activate": "Activate",
-    "reviewNote": "Bangla names need review by a native speaker."
+    "reviewNote": "Bangla names need review by a native speaker.",
+    "radius": "Duplicate distance for {name}",
+    "radiusInherited": "Parent's",
+    "radiusRange": "10 to 1000 m, or empty.",
+    "radiusSave": "Save",
+    "radiusSaved": "Saved"
   },
   "Invitation": {
     "title": "Accept invitation",
@@ -736,7 +742,8 @@
       "TASK_ASSIGNED": "You have a new task.",
       "TASK_CANCELLED": "One of your tasks was cancelled or given to another worker.",
       "MORE_EVIDENCE_NEEDED": "Your completed work needs changes or more evidence.",
-      "WORK_APPROVED": "Your completed work was approved."
+      "WORK_APPROVED": "Your completed work was approved.",
+      "REPORT_DUPLICATE": "Your report describes the same problem as an existing report and was linked to it."
     },
     "emailHeading": "Emails",
     "emailHint": "Notifications always appear in CivicEye. Choose which ones are also emailed to you. Emails never include report details.",
@@ -753,5 +760,52 @@
     "retry": "Retry",
     "attempts": "{count, plural, one {1 attempt} other {# attempts}}",
     "lastError": "Last error: {error}"
+  },
+  "Map": {
+    "title": "Map of reported issues",
+    "intro": "Public reports on a map. Reporters are never shown, and locations are rounded to about 100 m.",
+    "listView": "Show as a list",
+    "category": "Category",
+    "status": "Status",
+    "from": "Reported from",
+    "to": "Reported until",
+    "showAreas": "Show the areas organizations cover",
+    "inView": "{count, plural, =0 {No reports in this view.} one {1 report in this view.} other {# reports in this view.}}",
+    "zoomIn": "Zoom in to see reports.",
+    "truncated": "Only the 2,000 newest are shown; zoom in to see all.",
+    "loadFailed": "The map data could not be loaded. Try again in a moment.",
+    "openReport": "Open the report",
+    "mapLabel": "Map of public reports. Use the list view for a keyboard-friendly list.",
+    "unavailable": "The map could not be loaded on this device. Use the list view instead.",
+    "legend": "Pin colours",
+    "stages": {
+      "open": "Waiting or under review",
+      "work": "Work in progress",
+      "done": "Resolved, closed or rejected"
+    },
+    "nearbyHeading": "Already reported nearby?",
+    "nearbyHint": "These public reports are close by. If one is your problem, you can follow it instead of sending a new report.",
+    "distance": "{meters} m away",
+    "routedTo": "This report will go to: {name}",
+    "noOrganization": "No organization covers this place yet; a CivicEye administrator will assign the report.",
+    "severalOrganizations": "Several organizations cover this place; a CivicEye administrator will assign the report."
+  },
+  "Duplicates": {
+    "heading": "Possible duplicates",
+    "hint": "Reports of your organization with the same kind of problem, close by and recent.",
+    "none": "No likely duplicates.",
+    "distance": "{meters} m away",
+    "decide": "Decide",
+    "reason": "Reason",
+    "markAsDuplicate": "Mark this report as a duplicate of it",
+    "notDuplicate": "Not the same problem",
+    "finalHint": "Marking as a duplicate is final. The citizen is told which report it was linked to.",
+    "searchNearby": "Search nearby",
+    "radius": "Distance",
+    "meters": "{meters} m",
+    "nothingNearby": "No reports of your organization within this distance.",
+    "linkedHeading": "Linked to an existing report",
+    "linkedTo": "Your report describes the same problem as report",
+    "linkedPrivate": "Your report describes the same problem as an existing report, which is not public."
   }
 }

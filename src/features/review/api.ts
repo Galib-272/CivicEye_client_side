@@ -205,7 +205,8 @@ export type ReviewAction =
   | { kind: 'cancel-assignment'; reason: string }
   | { kind: 'verify'; outcome: VerificationOutcome; reason?: string }
   | { kind: 'reopen'; reason: string }
-  | { kind: 'close' };
+  | { kind: 'close' }
+  | { kind: 'mark-duplicate'; canonicalPublicId: string; reason: string };
 
 /**
  * One mutation for every review decision. Each sends the version the reviewer is looking at
@@ -286,6 +287,16 @@ export function useReviewAction(organizationId: string, publicId: string) {
               body: { reason: action.reason },
             }),
           );
+        case 'mark-duplicate':
+          return callApi(() =>
+            apiClient().POST(
+              '/api/v1/organizations/{organizationId}/reports/{publicId}/mark-duplicate',
+              {
+                ...params,
+                body: { canonicalPublicId: action.canonicalPublicId, reason: action.reason },
+              },
+            ),
+          );
         case 'close':
           return callApi(() =>
             apiClient().POST(
@@ -296,6 +307,56 @@ export function useReviewAction(organizationId: string, publicId: string) {
       }
     },
     onSettled: () => queryClient.invalidateQueries({ queryKey: reviewKeys.all }),
+  });
+}
+
+export type RelatedReport = Data<'OrganizationReportsController_duplicates_v1'>[number];
+
+/** Possible duplicates of a report, within the same organization. */
+export function useDuplicateCandidates(organizationId: string, publicId: string, enabled: boolean) {
+  return useQuery({
+    queryKey: ['review', organizationId, 'report', publicId, 'duplicates'],
+    enabled,
+    queryFn: () =>
+      callApi(() =>
+        apiClient().GET(
+          '/api/v1/organizations/{organizationId}/reports/{publicId}/duplicates',
+          orgPath(organizationId, publicId),
+        ),
+      ),
+  });
+}
+
+/** The organization's reports within a distance of this one. */
+export function useNearbySearch(
+  organizationId: string,
+  publicId: string,
+  radius: number,
+  enabled: boolean,
+) {
+  return useQuery({
+    queryKey: ['review', organizationId, 'report', publicId, 'nearby', radius],
+    enabled,
+    queryFn: () =>
+      callApi(() =>
+        apiClient().GET('/api/v1/organizations/{organizationId}/reports/{publicId}/nearby', {
+          params: { path: { organizationId, publicId }, query: { radius } },
+        }),
+      ),
+  });
+}
+
+export function useDismissDuplicate(organizationId: string, publicId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (body: { candidatePublicId: string; reason?: string }) =>
+      callApi(() =>
+        apiClient().POST(
+          '/api/v1/organizations/{organizationId}/reports/{publicId}/dismiss-duplicate',
+          { ...orgPath(organizationId, publicId), body },
+        ),
+      ),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: reviewKeys.all }),
   });
 }
 

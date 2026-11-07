@@ -30,6 +30,11 @@ export function AuthNav() {
             {t('publicReports')}
           </Link>
         </li>
+        <li>
+          <Link href="/map" className={linkStyle}>
+            {t('map')}
+          </Link>
+        </li>
         {auth ? (
           <>
             <li>

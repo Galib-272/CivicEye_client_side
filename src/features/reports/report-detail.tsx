@@ -21,6 +21,7 @@ import {
   type OwnReport,
   type ReportStatus,
 } from './api';
+import { Link } from '@/i18n/navigation';
 import { LocationMap } from './location-map';
 import { PhotoUploader, type PhotoItem } from './photo-uploader';
 import { PhotoGrid } from '@/features/work/assignment-history';
@@ -376,6 +377,7 @@ export function ReportDetail({ publicId }: { publicId: string }) {
   const report = useReport(publicId);
   const history = useReportHistory(publicId, report.isSuccess);
   const tExtra = useTranslations('ReportExtra');
+  const tDuplicate = useTranslations('Duplicates');
   const tReasons = useTranslations('RejectionReason');
 
   if (report.isError) {
@@ -415,6 +417,24 @@ export function ReportDetail({ publicId }: { publicId: string }) {
           <p className="font-medium">{tExtra('rejectedHeading')}</p>
           <p>{tExtra('rejectedReason', { reason: tReasons(own.rejection.reason) })}</p>
           <p className="whitespace-pre-line">{own.rejection.message}</p>
+        </FormAlert>
+      )}
+      {own?.duplicateOf && (
+        <FormAlert tone="info">
+          <p className="font-medium">{tDuplicate('linkedHeading')}</p>
+          {own.duplicateOf.publicId ? (
+            <p>
+              {tDuplicate('linkedTo')}{' '}
+              <Link
+                href={`/reports/${own.duplicateOf.publicId}`}
+                className="underline underline-offset-4"
+              >
+                {own.duplicateOf.publicId}
+              </Link>
+            </p>
+          ) : (
+            <p>{tDuplicate('linkedPrivate')}</p>
+          )}
         </FormAlert>
       )}
       {own && <InformationRequest report={own} />}

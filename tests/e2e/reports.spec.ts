@@ -61,6 +61,7 @@ const ownReport = {
   photos: [],
   completion: null,
   canGiveFeedback: false,
+  duplicateOf: null,
   feedback: null,
 };
 

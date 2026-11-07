@@ -15,6 +15,7 @@ import { LocationMap } from '@/features/reports/location-map';
 import { StatusBadge } from '@/features/reports/report-detail';
 import { Link } from '@/i18n/navigation';
 import { AssignmentPanel } from './assignment-panel';
+import { DuplicatesPanel } from './duplicates-panel';
 import {
   REJECTION_REASONS,
   useAddNote,
@@ -578,6 +579,9 @@ function Workspace({ scope, publicId }: { scope: WorkspaceScope; publicId: strin
           report={data}
           onTransferred={() => setTransferred(true)}
         />
+      )}
+      {scope.kind === 'organization' && (
+        <DuplicatesPanel organizationId={scope.organizationId} report={data} />
       )}
       <AssignmentPanel
         report={data}

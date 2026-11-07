@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLocale, useTranslations } from 'next-intl';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { FormAlert } from '@/components/ui/form-alert';
@@ -17,6 +17,7 @@ import { Link, useRouter } from '@/i18n/navigation';
 import { useCreateReport } from './api';
 import { inServiceBounds, LocationPicker, type PickedLocation } from './location-picker';
 import { PhotoUploader, type PhotoItem } from './photo-uploader';
+import { NearbyWarning, RoutingPreview } from '@/features/map/report-checks';
 
 function ReportForm() {
   const t = useTranslations('ReportForm');
@@ -45,6 +46,15 @@ function ReportForm() {
     defaultValues: { visibility: 'PUBLIC', locationDescription: '', categoryId: '' },
   });
   const { errors } = form.formState;
+  // Checks run only for a point inside the service area, rounded so dragging does not spam the API.
+  const categoryId = useWatch({ control: form.control, name: 'categoryId' }) ?? '';
+  const checkPoint =
+    location && inServiceBounds(location)
+      ? {
+          latitude: Math.round(location.latitude * 10_000) / 10_000,
+          longitude: Math.round(location.longitude * 10_000) / 10_000,
+        }
+      : null;
 
   const readyPhotos = photos.filter((photo) => photo.state === 'ready');
   const photosPending = photos.some(
@@ -124,6 +134,8 @@ function ReportForm() {
       />
       <PhotoUploader photos={photos} onChange={setPhotos} error={photoError} />
       <LocationPicker value={location} onChange={setLocation} error={locationError} />
+      {checkPoint && <RoutingPreview point={checkPoint} categoryId={categoryId} />}
+      {checkPoint && <NearbyWarning point={checkPoint} categoryId={categoryId} />}
       <TextField
         label={t('locationDescription')}
         hint={t('locationDescriptionHint')}
