@@ -79,6 +79,7 @@ types do not match the committed spec.
 | `/organizations/[id]/reports/[reportId]`      | Review workspace: decisions, information requests, transfer, internal notes, public updates                                                   |
 | `/admin/reports/[reportId]`                   | Super Admin read-only view of any report (audited), with moderation of public updates                                                         |
 | `/work`, `/work/[taskId]`                     | Worker tasks and availability; accept, start, progress, return and submit completed work                                                      |
+| `/map`                                        | Public map of reports with grouped pins, filters and organization areas; a list view is linked for keyboard and screen-reader users           |
 | `/notifications`                              | Your notifications; the bell in the header shows the unread count and pages update live                                                       |
 | `/admin/delivery-health`                      | Super Admins: events and emails that could not be delivered, with retry                                                                       |
 
