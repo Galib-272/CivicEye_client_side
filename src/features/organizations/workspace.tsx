@@ -69,6 +69,24 @@ function Workspace({ organizationId }: { organizationId: string }) {
             {tReview('openQueue')}
           </Link>
         )}
+        {(organization.myRole === 'ORG_ADMIN' || organization.myRole === 'ORG_REVIEWER') && (
+          <div className="flex flex-wrap gap-4 text-sm">
+            <Link
+              href={`/organizations/${organization.id}/analytics`}
+              className="text-accent underline underline-offset-4"
+            >
+              {t('dashboardLink')}
+            </Link>
+            {isAdmin && (
+              <Link
+                href={`/organizations/${organization.id}/audit`}
+                className="text-accent underline underline-offset-4"
+              >
+                {t('auditLink')}
+              </Link>
+            )}
+          </div>
+        )}
       </Section>
       {isAdmin && <ProfileForm scope="member" organization={organization} />}
       <MembersPanel scope="member" organizationId={organization.id} canManage={isAdmin} />

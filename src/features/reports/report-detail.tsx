@@ -25,6 +25,7 @@ import { Link } from '@/i18n/navigation';
 import { LocationMap } from './location-map';
 import { PhotoUploader, type PhotoItem } from './photo-uploader';
 import { PhotoGrid } from '@/features/work/assignment-history';
+import { FlagButton, ModerationNotices } from '@/features/insights/moderation';
 
 export function StatusBadge({ status }: { status: ReportStatus }) {
   const t = useTranslations('ReportStatus');
@@ -337,7 +338,7 @@ function Resolution({ report }: { report: OwnReport }) {
   );
 }
 
-function OrganizationUpdates({ publicId }: { publicId: string }) {
+function OrganizationUpdates({ publicId, canFlag }: { publicId: string; canFlag: boolean }) {
   const t = useTranslations('ReportExtra');
   const format = useFormatter();
   const updates = usePublicUpdates(publicId, true);
@@ -358,6 +359,7 @@ function OrganizationUpdates({ publicId }: { publicId: string }) {
                   timeStyle: 'short',
                 })}
               </p>
+              {canFlag && <FlagButton publicId={publicId} updateId={update.id} />}
             </li>
           ))}
         </ul>
@@ -439,6 +441,7 @@ export function ReportDetail({ publicId }: { publicId: string }) {
       )}
       {own && <InformationRequest report={own} />}
       {own && <Resolution report={own} />}
+      {own?.moderation && <ModerationNotices moderation={own.moderation} />}
 
       <Section title={t('category')}>
         <p>{locale === 'bn' ? data.category.nameBn : data.category.nameEn}</p>
@@ -487,7 +490,7 @@ export function ReportDetail({ publicId }: { publicId: string }) {
         {data.locationDescription && <p>{data.locationDescription}</p>}
       </Section>
 
-      <OrganizationUpdates publicId={publicId} />
+      <OrganizationUpdates publicId={publicId} canFlag={!own} />
 
       <Section title={t('timeline')}>
         {!history.data ? (
@@ -514,6 +517,7 @@ export function ReportDetail({ publicId }: { publicId: string }) {
       </Section>
 
       {own && <OwnerActions report={own} />}
+      {!own && <FlagButton publicId={publicId} />}
     </div>
   );
 }

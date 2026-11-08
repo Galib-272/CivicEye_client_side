@@ -201,6 +201,15 @@ export function AdminOrganizationsPage() {
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h1 className="text-2xl font-bold">{t('title')}</h1>
             <div className="flex flex-wrap gap-4">
+              <Link href="/admin/analytics" className="text-accent underline underline-offset-4">
+                {t('analyticsNav')}
+              </Link>
+              <Link href="/admin/moderation" className="text-accent underline underline-offset-4">
+                {t('moderationNav')}
+              </Link>
+              <Link href="/admin/audit" className="text-accent underline underline-offset-4">
+                {t('auditNav')}
+              </Link>
               <Link href="/admin/categories" className="text-accent underline underline-offset-4">
                 {t('categoriesNav')}
               </Link>

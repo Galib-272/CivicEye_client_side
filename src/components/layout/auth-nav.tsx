@@ -38,6 +38,11 @@ export function AuthNav() {
         {auth ? (
           <>
             <li>
+              <Link href="/dashboard" className={linkStyle}>
+                {t('dashboard')}
+              </Link>
+            </li>
+            <li>
               <Link href="/reports/new" className={linkStyle}>
                 {t('report')}
               </Link>
@@ -59,6 +64,11 @@ export function AuthNav() {
                 <li>
                   <Link href="/admin/reports/triage" className={linkStyle}>
                     {t('triage')}
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/admin/analytics" className={linkStyle}>
+                    {t('insights')}
                   </Link>
                 </li>
                 <li>

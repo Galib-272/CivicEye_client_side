@@ -14,6 +14,7 @@ import { categoryName } from '@/features/organizations/categories-panel';
 import { LocationMap } from '@/features/reports/location-map';
 import { StatusBadge } from '@/features/reports/report-detail';
 import { Link } from '@/i18n/navigation';
+import { EscalateForm } from '@/features/insights/moderation';
 import { AiPanel } from './ai-panel';
 import { AssignmentPanel } from './assignment-panel';
 import { DuplicatesPanel } from './duplicates-panel';
@@ -585,6 +586,9 @@ function Workspace({ scope, publicId }: { scope: WorkspaceScope; publicId: strin
       )}
       {scope.kind === 'organization' && (
         <DuplicatesPanel organizationId={scope.organizationId} report={data} />
+      )}
+      {scope.kind === 'organization' && (
+        <EscalateForm organizationId={scope.organizationId} publicId={publicId} />
       )}
       <AssignmentPanel
         report={data}
