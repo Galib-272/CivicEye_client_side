@@ -425,3 +425,63 @@ export function useHideUpdate(publicId: string) {
       }),
   });
 }
+
+// ─── Advisory AI ──────────────────────────────────────────────────────────────
+
+export type AiView = Data<'OrganizationAiController_view_v1'>;
+export type AiPrediction = AiView['predictions'][number];
+export type AiLabel = 'pothole' | 'crack' | 'asphalt_damage' | 'no_damage';
+export type AiReviewBody =
+  { action: 'ACCEPTED' | 'DISMISSED' } | { action: 'CORRECTED'; correctedLabel: AiLabel };
+
+const aiKey = (scope: WorkspaceScope, publicId: string) =>
+  ['review', scopeKey(scope), 'ai', publicId] as const;
+
+/** AI suggestions for a report; checks again every 3 s while a photo is still being analysed. */
+export function useAiSuggestions(scope: WorkspaceScope, publicId: string) {
+  return useQuery({
+    queryKey: aiKey(scope, publicId),
+    retry: false,
+    refetchInterval: (query) =>
+      query.state.data?.predictions.some((p) => p.status === 'PENDING') ? 3000 : false,
+    queryFn: () =>
+      scope.kind === 'organization'
+        ? callApi(() =>
+            apiClient().GET(
+              '/api/v1/organizations/{organizationId}/reports/{publicId}/ai',
+              orgPath(scope.organizationId, publicId),
+            ),
+          )
+        : callApi(() =>
+            apiClient().GET('/api/v1/admin/reports/{publicId}/ai', {
+              params: { path: { publicId } },
+            }),
+          ),
+  });
+}
+
+export function useAiReview(scope: WorkspaceScope, publicId: string) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: ({ predictionId, body }: { predictionId: string; body: AiReviewBody }) =>
+      scope.kind === 'organization'
+        ? callApi(() =>
+            apiClient().POST(
+              '/api/v1/organizations/{organizationId}/reports/{publicId}/ai/{predictionId}/review',
+              {
+                params: {
+                  path: { organizationId: scope.organizationId, publicId, predictionId },
+                },
+                body,
+              },
+            ),
+          )
+        : callApi(() =>
+            apiClient().POST('/api/v1/admin/reports/{publicId}/ai/{predictionId}/review', {
+              params: { path: { publicId, predictionId } },
+              body,
+            }),
+          ),
+    onSuccess: (data) => queryClient.setQueryData(aiKey(scope, publicId), data),
+  });
+}

@@ -807,5 +807,39 @@
     "linkedHeading": "Linked to an existing report",
     "linkedTo": "Your report describes the same problem as report",
     "linkedPrivate": "Your report describes the same problem as an existing report, which is not public."
+  },
+  "Ai": {
+    "heading": "AI suggestion",
+    "advisory": "Advisory only. The AI looked at the photos and can be wrong. It never changes the report: you decide.",
+    "none": "No AI analysis for this report.",
+    "switchedOff": "AI analysis is switched off. New photos are not analysed.",
+    "photo": "Photo {number}",
+    "analysing": "Analysing this photo…",
+    "failed": "The AI could not analyse this photo. Review it as usual.",
+    "likely": "Likely: {label}",
+    "uncertain": "Uncertain",
+    "uncertainBest": "The AI is not sure. Its best guess is {label}, but decide from the photo.",
+    "score": "Model score {score}",
+    "tooDark": "The photo is very dark.",
+    "blurry": "The photo looks blurry.",
+    "boxes": "{count, plural, one {Yellow box: where the AI saw damage.} other {Yellow boxes: where the AI saw damage.}}",
+    "matchingCategories": "Matching categories: {names}. Change the category in the decision below if needed.",
+    "feedbackHint": "Was the AI right? Your answer is recorded to measure the model; it does not change the report.",
+    "agree": "AI is right",
+    "wrong": "AI is wrong",
+    "dismiss": "Can't tell",
+    "actuallyShows": "The photo actually shows",
+    "choose": "Choose…",
+    "saveCorrection": "Save correction",
+    "reviewedAccepted": "You marked this suggestion as right.",
+    "reviewedCorrected": "You corrected this suggestion: the photo shows {label}.",
+    "reviewedDismissed": "You marked this suggestion as unclear.",
+    "modelVersion": "Model {version}",
+    "labels": {
+      "pothole": "Pothole",
+      "crack": "Crack",
+      "asphalt_damage": "Asphalt damage",
+      "no_damage": "No road damage"
+    }
   }
 }

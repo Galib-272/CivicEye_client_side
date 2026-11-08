@@ -1923,6 +1923,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/ai": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Advisory AI analysis of each photo (latest per photo). */
+        get: operations["OrganizationAiController_view_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/organizations/{organizationId}/reports/{publicId}/ai/{predictionId}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept, correct or dismiss an AI suggestion (recorded once). */
+        post: operations["OrganizationAiController_review_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}/ai": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Advisory AI analysis of each photo of any report (Super Admin). */
+        get: operations["AdminAiController_view_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/reports/{publicId}/ai/{predictionId}/review": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Accept, correct or dismiss an AI suggestion (Super Admin). */
+        post: operations["AdminAiController_review_v1"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/v1/admin/ai/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** AI switch, service model version and the last 7 days of results. */
+        get: operations["AdminAiController_status_v1"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/v1/media/upload-intent": {
         parameters: {
             query?: never;
@@ -11745,6 +11830,410 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationAiController_view_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            enabled: boolean;
+                            predictions: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                mediaId: string;
+                                photoPosition: number;
+                                /** @enum {string} */
+                                status: "PENDING" | "SUCCEEDED" | "FAILED";
+                                modelVersion: string | null;
+                                /** @enum {string|null} */
+                                label: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                confidence: number | null;
+                                uncertain: boolean | null;
+                                probabilities: {
+                                    [key: string]: number;
+                                } | null;
+                                detections: {
+                                    box: number[];
+                                    score: number;
+                                }[];
+                                warnings: string[];
+                                errorCode: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                suggestedCategories: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                }[];
+                                review: {
+                                    /** @enum {string} */
+                                    action: "ACCEPTED" | "CORRECTED" | "DISMISSED";
+                                    /** @enum {string|null} */
+                                    correctedLabel: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                    /** Format: date-time */
+                                    reviewedAt: string;
+                                } | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    OrganizationAiController_review_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                organizationId: string;
+                publicId: string;
+                predictionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    action: "ACCEPTED" | "CORRECTED" | "DISMISSED";
+                    /** @enum {string} */
+                    correctedLabel?: "pothole" | "crack" | "asphalt_damage" | "no_damage";
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            enabled: boolean;
+                            predictions: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                mediaId: string;
+                                photoPosition: number;
+                                /** @enum {string} */
+                                status: "PENDING" | "SUCCEEDED" | "FAILED";
+                                modelVersion: string | null;
+                                /** @enum {string|null} */
+                                label: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                confidence: number | null;
+                                uncertain: boolean | null;
+                                probabilities: {
+                                    [key: string]: number;
+                                } | null;
+                                detections: {
+                                    box: number[];
+                                    score: number;
+                                }[];
+                                warnings: string[];
+                                errorCode: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                suggestedCategories: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                }[];
+                                review: {
+                                    /** @enum {string} */
+                                    action: "ACCEPTED" | "CORRECTED" | "DISMISSED";
+                                    /** @enum {string|null} */
+                                    correctedLabel: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                    /** Format: date-time */
+                                    reviewedAt: string;
+                                } | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminAiController_view_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            enabled: boolean;
+                            predictions: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                mediaId: string;
+                                photoPosition: number;
+                                /** @enum {string} */
+                                status: "PENDING" | "SUCCEEDED" | "FAILED";
+                                modelVersion: string | null;
+                                /** @enum {string|null} */
+                                label: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                confidence: number | null;
+                                uncertain: boolean | null;
+                                probabilities: {
+                                    [key: string]: number;
+                                } | null;
+                                detections: {
+                                    box: number[];
+                                    score: number;
+                                }[];
+                                warnings: string[];
+                                errorCode: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                suggestedCategories: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                }[];
+                                review: {
+                                    /** @enum {string} */
+                                    action: "ACCEPTED" | "CORRECTED" | "DISMISSED";
+                                    /** @enum {string|null} */
+                                    correctedLabel: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                    /** Format: date-time */
+                                    reviewedAt: string;
+                                } | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminAiController_review_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                publicId: string;
+                predictionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": {
+                    /** @enum {string} */
+                    action: "ACCEPTED" | "CORRECTED" | "DISMISSED";
+                    /** @enum {string} */
+                    correctedLabel?: "pothole" | "crack" | "asphalt_damage" | "no_damage";
+                };
+            };
+        };
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            enabled: boolean;
+                            predictions: {
+                                /** Format: uuid */
+                                id: string;
+                                /** Format: uuid */
+                                mediaId: string;
+                                photoPosition: number;
+                                /** @enum {string} */
+                                status: "PENDING" | "SUCCEEDED" | "FAILED";
+                                modelVersion: string | null;
+                                /** @enum {string|null} */
+                                label: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                confidence: number | null;
+                                uncertain: boolean | null;
+                                probabilities: {
+                                    [key: string]: number;
+                                } | null;
+                                detections: {
+                                    box: number[];
+                                    score: number;
+                                }[];
+                                warnings: string[];
+                                errorCode: string | null;
+                                /** Format: date-time */
+                                createdAt: string;
+                                /** Format: date-time */
+                                completedAt: string | null;
+                                suggestedCategories: {
+                                    /** Format: uuid */
+                                    id: string;
+                                    slug: string;
+                                    nameEn: string;
+                                    nameBn: string;
+                                }[];
+                                review: {
+                                    /** @enum {string} */
+                                    action: "ACCEPTED" | "CORRECTED" | "DISMISSED";
+                                    /** @enum {string|null} */
+                                    correctedLabel: "pothole" | "crack" | "asphalt_damage" | "no_damage" | null;
+                                    /** Format: date-time */
+                                    reviewedAt: string;
+                                } | null;
+                            }[];
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
+                };
+            };
+            400: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiErrorDto"];
+                };
+            };
+        };
+    };
+    AdminAiController_status_v1: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": {
+                        /** @enum {boolean} */
+                        success: true;
+                        data: {
+                            enabled: boolean;
+                            serviceModelVersion: string | null;
+                            last7Days: {
+                                pending: number;
+                                succeeded: number;
+                                failed: number;
+                                reviewed: number;
+                                accepted: number;
+                                corrected: number;
+                                dismissed: number;
+                                correctionRate: number | null;
+                                medianLatencyMs: number | null;
+                            };
+                        };
+                        meta: components["schemas"]["ResponseMetaDto"];
+                    };
                 };
             };
         };

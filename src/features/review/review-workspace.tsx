@@ -14,6 +14,7 @@ import { categoryName } from '@/features/organizations/categories-panel';
 import { LocationMap } from '@/features/reports/location-map';
 import { StatusBadge } from '@/features/reports/report-detail';
 import { Link } from '@/i18n/navigation';
+import { AiPanel } from './ai-panel';
 import { AssignmentPanel } from './assignment-panel';
 import { DuplicatesPanel } from './duplicates-panel';
 import {
@@ -526,6 +527,8 @@ function Workspace({ scope, publicId }: { scope: WorkspaceScope; publicId: strin
           </ul>
         )}
       </Section>
+
+      <AiPanel scope={scope} report={data} />
 
       <Section title={t('exactLocation')}>
         <LocationMap
